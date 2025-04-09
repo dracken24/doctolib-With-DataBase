@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="css/style.css">
     
     <title>Mini Doctolib</title>
-
 </head>
 
-<body style="background-color: #8dbfcd;">
-
+<body>
     <!-- NavBar de mon site -->
     <nav class="navbar bg-dark navbar-dark navbar-expand-md p-3">
         <div class="container">
+            <img src="https://img.myloview.fr/images/logo-medecin-medecine-400-70576989.jpg" alt="logo" height="58" class="logo me-3 rounded-circle border">
             <a class="navbar-brand" href="#">Mini Doctolib</a>
             <button class="navbar-toggler">
                 <span class="navbar-toggler-icon"></span>
@@ -25,18 +24,26 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="index.html">Accueil</a>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">A Propos</a>
-                    </li>
-
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+                        <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="doctors.html">Prendre un rendez-vous</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Creer un compte</a></li> -->
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profil</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#connexion" href="#">Connexion</a></li>
                             <li><a class="dropdown-item" href="#">Creer un compte</a></li>
@@ -48,17 +55,20 @@
     </nav>
 
     <main>
-        <div class="container mt-3" style="background-color: #a58888;">
-            <!-- <div class="row">
-                <div class="col-12"> -->
-                    <h1>Page Acceuil</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra pretium dignissim. Vestibulum finibus sagittis tellus, a sollicitudin lectus gravida eget. Etiam diam odio, malesuada vel diam ut, condimentum aliquam augue. Nullam ultricies, purus sed fermentum dictum, dui eros hendrerit ante, sed iaculis neque libero id erat. Curabitur in ante lobortis, tristique purus sed, tincidunt lorem. Donec neque lorem, gravida at rhoncus eu, rhoncus sed erat. Aenean tempor nec metus sit amet consequat. Fusce convallis sollicitudin enim, et ullamcorper massa dictum ut. Donec placerat ullamcorper urna, a ultrices quam consectetur feugiat. Quisque congue dui sit amet leo pretium ullamcorper.</p>
-                    <p>Ut at neque luctus, sodales ex vitae, ultrices lacus. In malesuada odio at erat egestas vulputate. Aenean dapibus volutpat rutrum. Cras mattis vehicula dignissim. Praesent sit amet lacus in neque molestie facilisis vel sed diam. Sed maximus eros sit amet nibh sodales, in tristique nibh consectetur. Duis scelerisque tincidunt ante vitae ultrices. Proin mattis tortor at justo sagittis commodo. Vestibulum eu sapien dolor. Sed tempor nibh at mauris lobortis porta. Praesent rutrum efficitur quam, eu gravida mauris lacinia nec. Quisque dignissim placerat magna, at suscipit magna porta nec. In dolor nisl, ultrices id metus ac, efficitur volutpat diam. Etiam in pharetra mauris. Duis magna nulla, consequat id tincidunt vel, scelerisque sed urna. Sed non ipsum imperdiet, feugiat felis ut, posuere nisl.</p>
-                    <p>Donec suscipit turpis nec arcu fermentum commodo. Integer a eleifend arcu, nec dapibus nisi. Vestibulum venenatis neque in dui viverra, vel tincidunt dui ultricies. Ut id sem semper, lacinia lacus id, elementum nunc. Proin facilisis odio dui, suscipit viverra ex viverra quis. Pellentesque fringilla pulvinar risus, vitae volutpat neque pretium et. Fusce nisl dolor, scelerisque ullamcorper gravida non, aliquet non lectus. Proin blandit urna a metus feugiat pretium eu a ligula. Nullam placerat molestie mi in congue. Nam maximus mauris in suscipit ultrices. Etiam fringilla est ut bibendum posuere. Pellentesque ornare eros pretium velit sagittis, a rhoncus dui scelerisque. Fusce vitae sollicitudin tellus.</p>
-                    <p>Nullam quis efficitur nisi. Sed commodo vehicula lacus, eget consectetur neque pretium a. In eget diam et mi lacinia sollicitudin. Sed fermentum at tellus at hendrerit. Phasellus nec lacus libero. Phasellus vulputate magna a felis aliquet hendrerit. Phasellus feugiat, metus vel mollis porta, libero turpis hendrerit purus, eget sollicitudin ex ligula sit amet metus.</p>
-                    <p>Quisque quis scelerisque sem. Aliquam hendrerit sapien lorem. Nunc efficitur massa quis nulla euismod, sed eleifend lectus tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed neque lorem, accumsan id urna lobortis, sagittis ultricies erat. Quisque varius, nulla et dignissim tempus, sapien nisl suscipit erat, sit amet vestibulum libero urna eget libero. Maecenas tempor, augue sed condimentum hendrerit, tellus nibh tincidunt dui, sed scelerisque est lorem sit amet massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam vehicula tortor vitae laoreet cursus. Donec sodales dapibus enim, at faucibus neque lobortis et.</p>
-                <!-- </div>
-            </div> -->
+        <div class="container mt-3 mb-3" style="background-color: #a58888;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <h1>Page Acceuil</h1>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra pretium dignissim. Vestibulum finibus sagittis tellus, a sollicitudin lectus gravida eget. Etiam diam odio, malesuada vel diam ut, condimentum aliquam augue. Nullam ultricies, purus sed fermentum dictum, dui eros hendrerit ante, sed iaculis neque libero id erat. Curabitur in ante lobortis, tristique purus sed, tincidunt lorem. Donec neque lorem, gravida at rhoncus eu, rhoncus sed erat. Aenean tempor nec metus sit amet consequat. Fusce convallis sollicitudin enim, et ullamcorper massa dictum ut. Donec placerat ullamcorper urna, a ultrices quam consectetur feugiat. Quisque congue dui sit amet leo pretium ullamcorper.</p>
+                        <p>Ut at neque luctus, sodales ex vitae, ultrices lacus. In malesuada odio at erat egestas vulputate. Aenean dapibus volutpat rutrum. Cras mattis vehicula dignissim. Praesent sit amet lacus in neque molestie facilisis vel sed diam. Sed maximus eros sit amet nibh sodales, in tristique nibh consectetur. Duis scelerisque tincidunt ante vitae ultrices. Proin mattis tortor at justo sagittis commodo. Vestibulum eu sapien dolor. Sed tempor nibh at mauris lobortis porta. Praesent rutrum efficitur quam, eu gravida mauris lacinia nec. Quisque dignissim placerat magna, at suscipit magna porta nec. In dolor nisl, ultrices id metus ac, efficitur volutpat diam. Etiam in pharetra mauris. Duis magna nulla, consequat id tincidunt vel, scelerisque sed urna. Sed non ipsum imperdiet, feugiat felis ut, posuere nisl.</p>
+                        <p>Donec suscipit turpis nec arcu fermentum commodo. Integer a eleifend arcu, nec dapibus nisi. Vestibulum venenatis neque in dui viverra, vel tincidunt dui ultricies. Ut id sem semper, lacinia lacus id, elementum nunc. Proin facilisis odio dui, suscipit viverra ex viverra quis. Pellentesque fringilla pulvinar risus, vitae volutpat neque pretium et. Fusce nisl dolor, scelerisque ullamcorper gravida non, aliquet non lectus. Proin blandit urna a metus feugiat pretium eu a ligula. Nullam placerat molestie mi in congue. Nam maximus mauris in suscipit ultrices. Etiam fringilla est ut bibendum posuere. Pellentesque ornare eros pretium velit sagittis, a rhoncus dui scelerisque. Fusce vitae sollicitudin tellus.</p>
+                        <p>Nullam quis efficitur nisi. Sed commodo vehicula lacus, eget consectetur neque pretium a. In eget diam et mi lacinia sollicitudin. Sed fermentum at tellus at hendrerit. Phasellus nec lacus libero. Phasellus vulputate magna a felis aliquet hendrerit. Phasellus feugiat, metus vel mollis porta, libero turpis hendrerit purus, eget sollicitudin ex ligula sit amet metus.</p>
+                        <p>Quisque quis scelerisque sem. Aliquam hendrerit sapien lorem. Nunc efficitur massa quis nulla euismod, sed eleifend lectus tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed neque lorem, accumsan id urna lobortis, sagittis ultricies erat. Quisque varius, nulla et dignissim tempus, sapien nisl suscipit erat, sit amet vestibulum libero urna eget libero. Maecenas tempor, augue sed condimentum hendrerit, tellus nibh tincidunt dui, sed scelerisque est lorem sit amet massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam vehicula tortor vitae laoreet cursus. Donec sodales dapibus enim, at faucibus neque lobortis et.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
