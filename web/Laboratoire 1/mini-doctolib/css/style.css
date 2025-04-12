@@ -10,6 +10,9 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 body.loaded {
@@ -41,3 +44,10 @@ body.loaded {
     opacity: 1;
     transition: opacity 0.5s ease-in;
 } 
+
+/* Alignement du menu de navigation à droite */
+.menu-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
