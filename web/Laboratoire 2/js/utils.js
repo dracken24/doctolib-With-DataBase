@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profil</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#connexion" href="#">Connexion</a></li>
-                                <li><a class="dropdown-item" href="#">Creer un compte</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#connexion">Connexion</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#creation-account">Creer un compte</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -72,8 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="col-6 col-md-2 mb-3">
                         <h5>Profil</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Connexion</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Creer un compte</a></li>
+
+
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white" data-bs-toggle="modal" data-bs-target="#connexion">Connexion</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white" data-bs-toggle="modal" data-bs-target="#creation-account">Creer un compte</a></li>
                         </ul>
                         </div>
 
@@ -166,12 +168,9 @@ function preloadPages() {
 document.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' && e.target.href && e.target.href.startsWith(window.location.origin)) {
         // Ignorer les liens dans les menus déroulants
-        if (e.target.closest('.dropdown-menu') || e.target.classList.contains('dropdown-toggle')) {
-            return;
-        }
-        
-        // Ignorer les data-bs-toggle
-        if (e.target.hasAttribute('data-bs-toggle')) {
+        if (e.target.closest('.dropdown-menu')
+            || e.target.classList.contains('dropdown-toggle')
+                || e.target.hasAttribute('data-bs-toggle')) {
             return;
         }
         
@@ -187,3 +186,82 @@ document.addEventListener('click', function(e) {
         }, 600);
     }
 });
+
+/*******************************************************************************/
+/***                    Modal pour la connexion au compte                    ***/
+/*******************************************************************************/
+
+// Loader le modal au lancement de la page
+document.addEventListener('DOMContentLoaded', function(e) {
+    // console.log("Click sur : ", e.target.tagName);
+
+    document.getElementById('connexion').innerHTML = `
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content p-1">
+				<!-- Header -->
+				<div class="modal-header bg-dark">
+					<h3 class="modal-title text-white">Connexion</h3>
+					<button class="btn btn-close bg-white" data-bs-dismiss="modal"></button>
+				</div>
+				<!-- Body -->
+				<div class="modal-body p-0 d-flex flex-column">
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Nom utilisateur:</strong></label>
+						<input id="inputNom" type="text" class="form-control" placeholder="Entrez le nom" required>
+					</div>
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Mot de passe:</strong></label>
+						<input id="inputMdp" type="password" class="form-control" placeholder="Entrez le mot de passe" required>
+					</div>
+				</div>
+				<!-- Footer -->
+				<div class="modal-footer bg-dark text-white">
+					<button class="btn btn-danger m-2" data-bs-dismiss="modal">Fermer</button>
+					<button class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#Equipage">Connexion</button>
+				</div>
+			</div>
+		</div>
+    `;
+
+    document.getElementById('creation-account').innerHTML = `
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content p-1">
+				<!-- Header -->
+				<div class="modal-header bg-dark">
+					<h3 class="modal-title text-white">Creation de compte utilisateur</h3>
+					<button class="btn btn-close bg-white" data-bs-dismiss="modal"></button>
+				</div>
+				<!-- Body -->
+				<div class="modal-body p-0 d-flex flex-column">
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Nom utilisateur:</strong></label>
+						<input id="inputNom" type="text" class="form-control" placeholder="Entrez le nom" required>
+					</div>
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Mot de passe:</strong></label>
+						<input id="inputMdp" type="password" class="form-control" placeholder="Entrez le mot de passe" required>
+					</div>
+                    <div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Comfirmation Mot de passe:</strong></label>
+						<input id="inputMdp" type="password" class="form-control" placeholder="Entrez le mot de passe" required>
+					</div>
+                    <div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Email:</strong></label>
+						<input id="inputMdp" type="password" class="form-control" placeholder="Entrez votre email" required>
+					</div>
+                    <div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Email confirmation:</strong></label>
+						<input id="inputMdp" type="password" class="form-control" placeholder="Confirmez votre email" required>
+					</div>
+				</div>
+				<!-- Footer -->
+				<div class="modal-footer bg-dark text-white">
+					<button class="btn btn-danger m-2" data-bs-dismiss="modal">Fermer</button>
+					<button class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#Equipage">Creer un compte</button>
+				</div>
+			</div>
+		</div>
+    `;
+});
+
+
