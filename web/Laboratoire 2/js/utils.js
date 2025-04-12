@@ -34,15 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <li class="dropdown">
                                     <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="doctors.html">Liste des médecins</a></li>
-                                        <li><a class="dropdown-item" href="booking.html">Prendre un rendez-vous</a></li>
+                                        <li class="nav-item mb-2"><a class="dropdown-item" href="doctors.html">Liste des médecins</a></li>
+                                        <li class="nav-item mb-2"><a class="dropdown-item" href="booking.html">Prendre un rendez-vous</a></li>
                                     </ul>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <li class="dropdown">
                                     <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profil</a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#connexion" href="#">Connexion</a></li>
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
 
                     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                        <p>&copy; 2025 Mini Doctolib, Inc. All rights reserved.</p>
+                        <p>&copy; 2025 Mini Doctolib, Inc. All rights reserved. (school project)</p>
                         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                             <li class="ms-3"><a class="text-white bg-light p-2 rounded-circle icon-link" href="https://x.com/home" target="blank"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
                             <li class="ms-3"><a class="text-white bg-light p-2 rounded-circle icon-link" href="https://www.instagram.com/" target="blank"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
@@ -182,10 +182,9 @@ function preloadPages() {
 // clics sur les liens pour des transitions
 document.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' && e.target.href && e.target.href.startsWith(window.location.origin)) {
-        // Ignorer les liens dans les menus déroulants
-        if (e.target.closest('.dropdown-menu')
-            || e.target.classList.contains('dropdown-toggle')
-                || e.target.hasAttribute('data-bs-toggle')) {
+        // Ignorer uniquement les liens de toggle des dropdowns
+        if (e.target.classList.contains('dropdown-toggle')
+            || e.target.hasAttribute('data-bs-toggle')) {
             return;
         }
         
