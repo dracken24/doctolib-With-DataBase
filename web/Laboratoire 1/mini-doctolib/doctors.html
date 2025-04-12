@@ -21,15 +21,94 @@
     <main>
         <div class="container mt-3 mb-3">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 ">
                     <div class="row">
                         <h1>Liste des médecins</h1>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra pretium dignissim. Vestibulum finibus sagittis tellus, a sollicitudin lectus gravida eget. Etiam diam odio, malesuada vel diam ut, condimentum aliquam augue. Nullam ultricies, purus sed fermentum dictum, dui eros hendrerit ante, sed iaculis neque libero id erat. Curabitur in ante lobortis, tristique purus sed, tincidunt lorem. Donec neque lorem, gravida at rhoncus eu, rhoncus sed erat. Aenean tempor nec metus sit amet consequat. Fusce convallis sollicitudin enim, et ullamcorper massa dictum ut. Donec placerat ullamcorper urna, a ultrices quam consectetur feugiat. Quisque congue dui sit amet leo pretium ullamcorper.</p>
-                        <p>Ut at neque luctus, sodales ex vitae, ultrices lacus. In malesuada odio at erat egestas vulputate. Aenean dapibus volutpat rutrum. Cras mattis vehicula dignissim. Praesent sit amet lacus in neque molestie facilisis vel sed diam. Sed maximus eros sit amet nibh sodales, in tristique nibh consectetur. Duis scelerisque tincidunt ante vitae ultrices. Proin mattis tortor at justo sagittis commodo. Vestibulum eu sapien dolor. Sed tempor nibh at mauris lobortis porta. Praesent rutrum efficitur quam, eu gravida mauris lacinia nec. Quisque dignissim placerat magna, at suscipit magna porta nec. In dolor nisl, ultrices id metus ac, efficitur volutpat diam. Etiam in pharetra mauris. Duis magna nulla, consequat id tincidunt vel, scelerisque sed urna. Sed non ipsum imperdiet, feugiat felis ut, posuere nisl.</p>
-                        <p>Nullam quis efficitur nisi. Sed commodo vehicula lacus, eget consectetur neque pretium a. In eget diam et mi lacinia sollicitudin. Sed fermentum at tellus at hendrerit. Phasellus nec lacus libero. Phasellus vulputate magna a felis aliquet hendrerit. Phasellus feugiat, metus vel mollis porta, libero turpis hendrerit purus, eget sollicitudin ex ligula sit amet metus.</p>
-                        <p>Quisque quis scelerisque sem. Aliquam hendrerit sapien lorem. Nunc efficitur massa quis nulla euismod, sed eleifend lectus tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed neque lorem, accumsan id urna lobortis, sagittis ultricies erat. Quisque varius, nulla et dignissim tempus, sapien nisl suscipit erat, sit amet vestibulum libero urna eget libero. Maecenas tempor, augue sed condimentum hendrerit, tellus nibh tincidunt dui, sed scelerisque est lorem sit amet massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam vehicula tortor vitae laoreet cursus. Donec sodales dapibus enim, at faucibus neque lobortis et.</p>
                     </div>
+
+                    <!-- Filtres statiques -->
+                    <div>
+                        <!-- <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a> -->
+                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Filtres</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item">Par spécialité</a></li>
+                                    <li><a class="dropdown-item">Par ville</a></li>
+                                    <li><a class="dropdown-item">Par nom</a></li>
+                                </ul>
+                    </div>
+
+                    <!-- Carte Container -->
+                    <div class="shadow-lg border container p-3">
+
+                        <div class="container card-deck row justify-content-center d-flex align-items-center">
+                        
+                            <div class="card border-dark m-1 p-0" style="width: 18em;">
+                                <img src="https://shorturl.at/gpwIN" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-2">Natacha</h5>
+                                    <p class="lead mb-0">Gynécologue</p>
+                                    <p class="card-text">Boucherville</p>
+                                </div>
+                                <div class="card-footer">
+                                    <center>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                                        Prendre rendez-vous
+                                    </button>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark m-1 p-0" style="width: 18em;">
+                                <img src="https://shorturl.at/gpwIN" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-2">Nadia</h5>
+                                    <p class="lead mb-0">Ostéopathe</p>
+                                    <p class="card-text">Laval</p>
+                                </div>
+                                <div class="card-footer">
+                                    <center>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                                        Prendre rendez-vous
+                                    </button>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark m-1 p-0" style="width: 18em;">
+                                <img src="https://shorturl.at/gpwIN" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-2">Jean-François</h5>
+                                    <p class="lead mb-0">Médecin généraliste</p>
+                                    <p class="card-text">Montréal</p>
+                                </div>
+                                <div class="card-footer">
+                                    <center>
+                                        <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                                        Prendre rendez-vous
+                                    </button>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark m-1 p-0" style="width: 18em;">
+                                <img src="https://shorturl.at/gpwIN" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-2">Nom du médecin</h5>
+                                    <p class="lead mb-0">Spécialite</p>
+                                    <p class="card-text">Ville</p>
+                                </div>
+                                <div class="card-footer">
+                                    <center>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                                        Prendre rendez-vous
+                                    </button>
+                                    </center>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> 
                 </div>
             </div>
         </div>
@@ -43,5 +122,3 @@
     <script src="../../Laboratoire 2/js/utils.js"></script>
 </body>
 </html>
-
-
