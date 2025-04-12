@@ -1,15 +1,43 @@
+/*******************************************************************************/
+/***      Styles pour éviter le flash blanc lors du changement dwe page      ***/
+/*******************************************************************************/
+html {
+    background-color: #000000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #f8f9fa;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
 .nav-link:hover {
     color: #0d6efd !important;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
 }
 
 .icon-link {
     color: #686868 !important;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
 }
 
 .icon-link:hover {
     color: #0d6efd !important;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
 }
 
+/* Masquer le contenu jusqu'à ce qu'il soit chargé */
+.page-transition {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page-transition.loaded {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+} 
