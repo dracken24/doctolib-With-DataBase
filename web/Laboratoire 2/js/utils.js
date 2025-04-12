@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profil</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#connexion">Connexion</a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#creation-account">Creer un compte</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#connexion" href="#">Connexion</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#creation-account" href="#">Creer un compte</a></li>
                             </ul>
                         </li>
                     </ul>
