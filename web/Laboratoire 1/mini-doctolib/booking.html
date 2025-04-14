@@ -25,14 +25,134 @@
                     <div class="row">
                         <h1>Prendre un rendez-vous</h1>
 
-                        <p>Quisque quis scelerisque sem. Aliquam hendrerit sapien lorem. Nunc efficitur massa quis nulla euismod, sed eleifend lectus tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed neque lorem, accumsan id urna lobortis, sagittis ultricies erat. Quisque varius, nulla et dignissim tempus, sapien nisl suscipit erat, sit amet vestibulum libero urna eget libero. Maecenas tempor, augue sed condimentum hendrerit, tellus nibh tincidunt dui, sed scelerisque est lorem sit amet massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam vehicula tortor vitae laoreet cursus. Donec sodales dapibus enim, at faucibus neque lobortis et.. In malesuada odio at erat egestas vulputate. Aenean dapibus volutpat rutrum. Cras mattis vehicula dignissim. Praesent sit amet lacus in neque molestie facilisis vel sed diam. Sed maximus eros sit amet nibh sodales, in tristique nibh consectetur. Duis scelerisque tincidunt ante vitae ultrices. Proin mattis tortor at justo sagittis commodo. Vestibulum eu sapien dolor. Sed tempor nibh at mauris lobortis porta. Praesent rutrum efficitur quam, eu gravida mauris lacinia nec. Quisque dignissim placerat magna, at suscipit magna porta nec. In dolor nisl, ultrices id metus ac, efficitur volutpat diam. Etiam in pharetra mauris. Duis magna nulla, consequat id tincidu</p>
-                        <p>Ut at neque luctus, sodales ex vitae, ultrices lacus. In malesuada odio at erat egestas vulputate. Aenean dapibus volutpat rutrum. Cras mattis vehicula dignissim. Praesent sit amet lacus in neque molestie facilisis vel sed diam. Sed maximus eros sit amet nibh sodales, in tristique nibh consectetur. Duis scelerisque tincidunt ante vitae ultrices. Proin mattis tortor at justo sagittis commodo. Vestibulum eu sapien dolor. Sed tempor nibh at mauris lobortis porta. Praesent rutrum efficitur quam, eu gravida mauris lacinia nec. Quisque dignissim placerat magna, at suscipit magna porta nec. In dolor nisl, ultrices id metus ac, efficitur volutpat diam. Etiam in pharetra mauris. Duis magna nulla, consequat id tincidunt vel, scelerisque sed urna. Sed non ipsum imperdiet, feugiat felis ut, posuere nisl.</p>
-                        <p>Nullam quis efficitur nisi. Sed commodo vehicula lacus, eget consectetur neque pretium a. In eget diam et mi lacinia sollicitudin. Sed fermentum at tellus at hendrerit. Phasellus nec lacus libero. Phasellus vulputate magna a felis aliquet hendrerit. Phasellus feugiat, metus vel mollis porta, libero turpis hendrerit purus, eget sollicitudin ex ligula sit amet metus.</p>
-                        <p>Quisque quis scelerisque sem. Aliquam hendrerit sapien lorem. Nunc efficitur massa quis nulla euismod, sed eleifend lectus tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed neque lorem, accumsan id urna lobortis, sagittis ultricies erat. Quisque varius, nulla et dignissim tempus, sapien nisl suscipit erat, sit amet vestibulum libero urna eget libero. Maecenas tempor, augue sed condimentum hendrerit, tellus nibh tincidunt dui, sed scelerisque est lorem sit amet massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam vehicula tortor vitae laoreet cursus. Donec sodales dapibus enim, at faucibus neque lobortis et.</p>
+                        <p> Nous sommes présentement en manque de main d'oeuvre mais vous pouvez toujours cliquer plus bas en espérant avoir un rendez-vous avant 2034!!</p>
+                        <button class="btn btn-success rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#rendez-vous">
+                            <i class="fas fa-calendar-plus me-2"></i>Prise de Rendez-vous
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="rendez-vous" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Prise de rendez-vous (***Formulaire fictif***)</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="prenom" placeholder="Entrez votre prénom">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tel" class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" id="tel" placeholder="Entrez votre numéro de téléphone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="specialite" class="form-label">Spécialité</label>
+                                <select class="form-control" id="specialite">
+                                    <option value="">Sélectionnez une spécialité</option>
+                                    <option value="generaliste">Médecine générale</option>
+                                    <option value="cardiologue">Cardiologie</option>
+                                    <option value="dermatologue">Dermatologie</option>
+                                    <option value="pediatre">Pédiatrie</option>
+                                    <option value="psychiatre">Psychiatrie</option>
+                                    <option value="ophtalmologue">Ophtalmologie</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="medecin" class="form-label">Médecin</label>
+                                <select class="form-control" id="medecin">
+                                    <option value="">Sélectionnez un médecin</option>
+                                    <option value="dr-martin">Dr. Martin</option>
+                                    <option value="dr-dubois">Dr. Dubois</option>
+                                    <option value="dr-petit">Dr. Petit</option>
+                                    <option value="dr-robert">Dr. Robert</option>
+                                    <option value="dr-bernard">Dr. Bernard</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Choisissez une date</label>
+                                <input type="date" class="form-control" id="date" placeholder="Choisissez une date">
+                            </div>
+                            <div class="mb-3">
+                                <label for="heure" class="form-label">Choisissez une heure</label>
+                                <input type="time" class="form-control" id="heure" placeholder="Choisissez une heure">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" placeholder="Entrez votre message"></textarea>
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmation">Confirmer</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    
+    
+        <!-- Modal de confirmation de rendez-vous -->
+        <div class="modal fade" id="confirmation" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation de rendez-vous</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success mb-4">
+                            <p class="mb-0"><i class="fas fa-check-circle me-2"></i>Votre rendez-vous a été confirmé avec succès.</p>
+                        </div>
+                        <div class="recap-details">
+                            <h6 class="mb-3">Récapitulatif de votre rendez-vous :</h6>
+                            <div class="recap-content">
+                                <p><strong>Patient :</strong> Jean Dupont</p>
+                                <p><strong>Email :</strong> jean.dupont@email.com</p>
+                                <p><strong>Téléphone :</strong> 514-123-4567</p>
+                                <p><strong>Spécialité :</strong> Médecine générale</p>
+                                <p><strong>Médecin :</strong> Dr. Martin</p>
+                                <p><strong>Date :</strong> 25 mars 2024</p>
+                                <p><strong>Heure :</strong> 14:30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="index.html" class="btn btn-secondary">Retour à l'Accueil</a>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#rendez-vous">Prendre un autre rendez-vous</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        <!--Récapitulatif du rendez-vous-->
+        <div class="modal fade" id="recap" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Récapitulatif du rendez-vous</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </main>
 
     <!-- footBar -->
