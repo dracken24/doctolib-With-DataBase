@@ -21,99 +21,46 @@
     <main>
         <div class="container mt-3 mb-3">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <div class="row">
                         <h1>Pour nous contacter</h1>
 
                         <p>Pour de plus amples informations ou pour laisser un commentaire, veuillez nous laisser un message, nous vous reviendrons dans les plus brefs délais.</p>
 
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#rendez-vous">
-                            Ouvrir le formulaire de contact
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="modal fade" id="rendez-vous" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Formulaire de contact</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="nom" class="form-label">Nom</label>
-                                <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tel" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" placeholder="Entrez votre message"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#confirmation_contact">Envoyer</button>
-                            </div>
-                       </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <!-- Modal de confirmation de rendez-vous -->
-         <div class="modal fade" id="confirmation_contact" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <h5 class="modal-title">Confirmation de contact</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-success mb-4">
-                            <p class="mb-0"><i class="fas fa-check-circle me-2"></i>Votre message a été envoyé avec succès.</p>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#rendez-vous">
+                                Ouvrir le formulaire de contact
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <br>
-        <br>
-        <br>
-
+        <!-- ... existing code ... -->
         
-<p><h1>Coordonnées</h1></p>
-<p>Vous pouvez aussi nous contacter par email ou par téléphone.</p>
-<ul>
-<li>Email: contact@doctolib.com</li>
-<li>Téléphone: 514-254-7131</li>
-<li>Adresse: 3800, rue Sherbrooke Est, Montréal, QC, H1X 2A2</li>
-<li>Horaires: Lundi - Vendredi: 9h - 17h</li>
-</ul>
+        <div class="container text-center">
+            <h1>Coordonnées</h1>
+            <p>Vous pouvez aussi nous contacter par email ou par téléphone.</p>
+            <ul class="list-unstyled">
+                <li>Email: contact@doctolib.com</li>
+                <li>Téléphone: 514-254-7131</li>
+                <li>Adresse: 3800, rue Sherbrooke Est, Montréal, QC, H1X 2A2</li>
+                <li>Horaires: Lundi - Vendredi: 9h - 17h</li>
+            </ul>
 
-<div class="row">
-    <div class="col-12">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.163137767651!2d-73.55587442346183!3d45.55086127910223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91bf5bacbeffd%3A0x68ff300997eff5c!2sCollège%20de%20Maisonneuve!5e0!3m2!1sfr!2sca!4v1710425147621!5m2!1sfr!2sca" 
-            width="50%" 
-            height="500" 
-            style="border:0;" 
-            allowfullscreen="" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-</div>
-
-
-
-
-        </iframe>
-    </div>
-</div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.163137767651!2d-73.55587442346183!3d45.55086127910223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91bf5bacbeffd%3A0x68ff300997eff5c!2sCollège%20de%20Maisonneuve!5e0!3m2!1sfr!2sca!4v1710425147621!5m2!1sfr!2sca" 
+                        width="50%" 
+                        height="500" 
+                        style="border:0;" 
+                        class="mx-auto d-block"
+                        allowfullscreen="" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- footBar -->
@@ -124,5 +71,3 @@
     <script src="../../Laboratoire 2/js/utils.js"></script>
 </body>
 </html>
-
-
