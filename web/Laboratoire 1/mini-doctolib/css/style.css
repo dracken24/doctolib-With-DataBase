@@ -1,9 +1,10 @@
 /*******************************************************************************/
-/***      Styles pour éviter le flash blanc lors du changement dwe page      ***/
+/***      Styles pour éviter le flash blanc lors du changement de page       ***/
 /*******************************************************************************/
 html {
     background-color: #212529;
     transition: opacity 1s ease-in-out;
+    height: 100%;
 }
 
 body {
@@ -18,6 +19,23 @@ body {
 body.loaded {
     opacity: 1;
 }
+
+/* fix footer au bas de la page */
+.sticky-footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sticky-footer main {
+    flex: 1 0 auto;
+}
+
+.footer-container {
+    flex-shrink: 0;
+}
+
+/* nav-link */
 
 .nav-link:hover {
     color: #0d6efd !important;
@@ -34,7 +52,7 @@ body.loaded {
     transition: color 1s ease;
 }
 
-/* Masquer le contenu jusqu'à ce qu'il soit chargé */
+/* Masquer le contenu jusqu'a ce qu'il soit charge */
 .page-transition {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -43,11 +61,8 @@ body.loaded {
 .page-transition.loaded {
     opacity: 1;
     transition: opacity 0.5s ease-in;
-} 
+}
 
-/* Alignement du menu de navigation à droite */
-.menu-right {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+.specialite {
+    background-color: rgb(15, 112, 203);
 }

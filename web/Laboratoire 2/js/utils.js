@@ -3,6 +3,9 @@
 /*******************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Ajouter la classe sticky-footer au body
+    document.body.classList.add('sticky-footer');
+    
     document.getElementById('appBar').innerHTML = `
         <nav class="navbar bg-dark navbar-dark navbar-expand-md p-3">
             <div class="container col-12">
@@ -17,15 +20,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
-                    <!-- Colonne centrale : Slogan -->
+                    <!-- Colonne centrale : Slogan uniquement -->
                     <div class="col-md-6 text-center">
-                        <img src="assets/img/slogan.png" height="58px" class="me-3">
+                        <!-- Slogan visible uniquement sur grands écrans -->
+                        <img src="assets/img/slogan.png" height="58px" class="d-none d-lg-block mx-auto">
                     </div>
                     
                     <!-- Colonne de droite : Menu -->
                     <div class="col-md-3">
                         <div class="collapse navbar-collapse d-flex justify-content-end">
-                            <ul class="navbar-nav">
+                            <!-- Menu déroulant visible sur écrans moyens et petits -->
+                            <div class="dropdown d-md-block d-lg-none me-2">
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Menu
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="index.html">Accueil</a></li>
+                                    <li><a class="dropdown-item" href="contact.html">Contact</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="doctors.html">Liste des médecins</a></li>
+                                    <li><a class="dropdown-item" href="booking.html">Prendre un rendez-vous</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#connexion" href="#">Connexion</a></li>
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#creation-account" href="#">Creer un compte</a></li>
+                                </ul>
+                            </div>
+                            
+                            <ul class="navbar-nav d-none d-lg-flex">
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Accueil</a>
                                 </li>
@@ -64,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('footBar').innerHTML = `
-        <div class="footer-container bg-dark text-white">
+        <div class="footer-container bg-dark text-white mt-auto">
             <footer class="py-5">
                 <div class="container">
                     <div class="row">
@@ -154,30 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pageTransitions.forEach(element => {
         element.classList.add('loaded');
     });
-    
-    // Précharger les pages pour éviter les flashs blancs
-    preloadPages();
 });
-
-// Fonction pour précharger les pages
-function preloadPages() {
-    // Liste des pages à précharger
-    const pages = [
-        'index.html',
-        'doctors.html',
-        'booking.html',
-        'contact.html',
-        'confirmation.html'
-    ];
-    
-    // Précharger chaque page
-    pages.forEach(page => {
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = page;
-        document.head.appendChild(link);
-    });
-}
 
 // clics sur les liens pour des transitions
 document.addEventListener('click', function(e) {
@@ -277,5 +275,4 @@ document.addEventListener('DOMContentLoaded', function(e) {
 		</div>
     `;
 });
-
 
