@@ -1,9 +1,9 @@
 begin transaction;
- 
+
 drop schema if exists projet_final cascade;
- 
+
 create schema projet_final;
- 
+
 set search_path to projet_final;
 
 CREATE TABLE annulation
@@ -69,6 +69,7 @@ CREATE TABLE plage_horaire
   heure_fin   date    NOT NULL,
   disponible  BOOLEAN NOT NULL,
   id_medecin  INT     NOT NULL,
+  id_ville    INT     NOT NULL,
   PRIMARY KEY (id_plage)
 );
 
@@ -100,7 +101,7 @@ commit;
 -------------------------------------------------------------------------------
 
 begin transaction;
- 
+
 set search_path to projet_final;
 
 ALTER TABLE medecin
@@ -153,12 +154,58 @@ ALTER TABLE notification
     FOREIGN KEY (id_patient)
     REFERENCES patient (id_patient);
 
+ALTER TABLE plage_horaire
+  ADD CONSTRAINT FK_ville_TO_plage_horaire
+    FOREIGN KEY (id_ville)
+    REFERENCES ville (id_ville);
+
 commit;
 
 ------------------------------------------------------------------------
 
+select * from annulation;
+select * from compte_rendu;
+select * from consulte;
+select * from medecin;
+select * from notification;
+select * from patient;
+select * from plage_horaire;
+select * from rendez_vous;
+select * from specialite;
+select * from ville;
 
+INSERT INTO specialite (id_specialite, nom_specialite) VALUES 
+	(1, 'generale'),
+	(2, 'familiale'),
+	(3, 'endocrinologie'),
+	(4, 'alergologue'),
+	(5, 'orl'),
+	(6, 'Chirurgien-dentiste')
+;
 
+INSERT INTO medecin (id_medecin, nom_medecin, prenom_medecin,email_medecin, id_specialite) VALUES 
+	(1, 'Norris', 'Chuck', 'god@supergod.god', 1),
+	(2, 'Tremblay', 'Tony', 'aaa@aaaaaa.aaa', 4),
+	(3, 'Smith', 'John', 'bbbbb@bbbbbb.bbb', 5),
+	(4, 'Pigeon', 'Alice', 'ccc@cccccc.ccc', 2)
+;
+
+INSERT INTO ville (id_ville, nom_ville) VALUES 
+	(1, 'Quebec'),
+	(2, 'Montreal'),
+	(3, 'Sainte-Marie'),
+	(4, 'Trois-Riviere'),
+	(5, 'Alma'),
+	(6, 'Chicoutimi')
+;
+
+INSERT INTO patient (id_patient, nom_patient, prenom_patient, email_patient, telephone_patient, remarque, id_ville) VALUES 
+	(1, 'Bouchard', 'Bob', 'god@supergod.god', '111-1111-111', null, 2),
+	(2, 'Tremblay', 'Annie', 'ddd@aaaaaa.aaa', '222-2222-222', 'Pas mal tanante.', 4),
+	(3, 'Shark', 'Baby', 'ssss@lllll.lll', '333-3333-333', null, 5),
+	(4, 'Lee', 'Bruce', 'lll@lllll.lll', '444-4444-444', 'Toujours en retard.', 2),
+	(5, 'Monkey.D', 'Luffy', 'vogue@merry.op', '555-5555-555', null, 2)
+;
 
 
 
