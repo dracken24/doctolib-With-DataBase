@@ -2,6 +2,8 @@ begin transaction;
 
 drop schema if exists projet_final cascade;
 
+-- commit;
+
 create schema projet_final;
 
 set search_path to projet_final;
@@ -26,10 +28,15 @@ CREATE TABLE compte_rendu
 
 CREATE TABLE consulte
 (
+  id_consulte int not null,
   type_consultation INT NOT NULL,
   id_medecin        INT NOT NULL,
-  id_ville          INT NOT NULL
+  id_ville          INT NOT NULL,
+  PRIMARY KEY (id_consulte)
 );
+-- type_consultation:
+--		sur place = 0
+--		par telephone = 1
 
 CREATE TABLE medecin
 (
@@ -45,7 +52,7 @@ CREATE TABLE notification
 (
   id_notif    INT  NOT NULL,
   contenue    TEXT NOT NULL,
-  date_envoie date NOT NULL,
+  date_envoie TIMESTAMP NOT NULL,
   id_patient  int  NOT NULL,
   PRIMARY KEY (id_notif)
 );
@@ -65,11 +72,11 @@ CREATE TABLE patient
 CREATE TABLE plage_horaire
 (
   id_plage    INT     NOT NULL,
-  heure_debut date    NOT NULL,
-  heure_fin   date    NOT NULL,
+  heure_debut TIMESTAMP    NOT NULL,
+  heure_fin   TIMESTAMP    NOT NULL,
   disponible  BOOLEAN NOT NULL,
   id_medecin  INT     NOT NULL,
-  id_ville    INT     NOT NULL,
+  id_consulter int	not null,
   PRIMARY KEY (id_plage)
 );
 
@@ -155,24 +162,13 @@ ALTER TABLE notification
     REFERENCES patient (id_patient);
 
 ALTER TABLE plage_horaire
-  ADD CONSTRAINT FK_ville_TO_plage_horaire
-    FOREIGN KEY (id_ville)
-    REFERENCES ville (id_ville);
+  ADD CONSTRAINT FK_consulter_TO_plage_horaire
+    FOREIGN KEY (id_consulter)
+    REFERENCES consulte (id_consulte);
 
 commit;
 
 ------------------------------------------------------------------------
-
-select * from annulation;
-select * from compte_rendu;
-select * from consulte;
-select * from medecin;
-select * from notification;
-select * from patient;
-select * from plage_horaire;
-select * from rendez_vous;
-select * from specialite;
-select * from ville;
 
 INSERT INTO specialite (id_specialite, nom_specialite) VALUES 
 	(1, 'generale'),
@@ -196,7 +192,8 @@ INSERT INTO ville (id_ville, nom_ville) VALUES
 	(3, 'Sainte-Marie'),
 	(4, 'Trois-Riviere'),
 	(5, 'Alma'),
-	(6, 'Chicoutimi')
+	(6, 'Chicoutimi'),
+	(7, 'Saint-Nean')
 ;
 
 INSERT INTO patient (id_patient, nom_patient, prenom_patient, email_patient, telephone_patient, remarque, id_ville) VALUES 
@@ -204,10 +201,90 @@ INSERT INTO patient (id_patient, nom_patient, prenom_patient, email_patient, tel
 	(2, 'Tremblay', 'Annie', 'ddd@aaaaaa.aaa', '222-2222-222', 'Pas mal tanante.', 4),
 	(3, 'Shark', 'Baby', 'ssss@lllll.lll', '333-3333-333', null, 5),
 	(4, 'Lee', 'Bruce', 'lll@lllll.lll', '444-4444-444', 'Toujours en retard.', 2),
-	(5, 'Monkey.D', 'Luffy', 'vogue@merry.op', '555-5555-555', null, 2)
+	(5, 'Monkey.D', 'Luffy', 'vogue@merry.op', '555-5555-555', 'Un peu srupide mais attachant.', 2)
 ;
 
+Insert into consulte (id_consulte, type_consultation, id_medecin, id_ville) values
+	(1, 0, 1,1),
+	(2, 1, 3,2),
+	(3, 1, 4,4)
+;
 
+Insert into plage_horaire (id_plage, heure_debut, heure_fin, disponible, id_medecin, id_consulter) values
+	(1, '2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 1, 1),
+	(2, '2023-07-01 10:00:00', '2023-07-01 11:00:00', false, 3, 2),
+	(3, '2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 4, 3)
+;
+
+Insert into rendez_vous (id_rdv, confirm_rdv, id_plage, id_patient) values
+	(1, true, 1, 5),
+	(2, false, 2, 3),
+	(3, true, 3, 2)
+;
+
+select * from annulation;
+select * from compte_rendu;
+select * from consulte;
+select * from medecin;
+select * from notification;
+select * from patient;
+select * from plage_horaire;
+select * from rendez_vous;
+select * from specialite;
+select * from ville;
+
+---------------------------------------------------------------------------------
+------------------------------------- NADIA -------------------------------------
+---------------------------------------------------------------------------------
+
+-- 1: Rechercher les rendez-vous confirmés à venir pour un médecin donné. 
+
+with
+  R1 as (select * from medecin where id_medecin = 1),
+  R2 as (select id_plage from plage_horaire p where p.id_medecin in (select id_medecin from R1) and p.disponible = true),
+  R3 as (select * from rendez_vous r where r.id_plage in (select id_plage from R2))
+select * from R3;
+
+
+
+-- 2: Lister les médecins avec le nombre total de rendez-vous confirmés qu'ils ont effectués. 
+with
+  R1 as (select * from rendez_vous where confirm_rdv = true),
+  R2 as (select * from plage_horaire p where p.id_plage in (select id_plage from R1)),
+  R3 as (select * from medecin m where m.id_medecin in (select id_medecin from R2)),
+  R4 as (select id_medecin, count(id_medecin) as nombre_rdv from R3 group by id_medecin)
+
+select * from R4;
+
+
+
+-- commit;
+
+-- 9: Moyenne de rendez-vous par médecin par semaine. 
+-- r1 ← σ WEEK(date_rdv)  (RENDEZ_VOUS) 
+-- r2 ← 𝓐  id_medecin, week count_rdv ← count(∗)  (r1) 
+-- r3 ← 𝓐 id_medecin, moyenne_rdv  ← avg(count_rdv)  (r2) 
+-- r4 ← π id_medecin, moyenne_rdv (r3) 
+
+ 
+
+-- 10: Liste des médecins qui n'ont aucun rendez-vous cette semaine. 
+-- r1 ← σ WEEK(date_rdv) (RENDEZ_VOUS) 
+-- r2 ← σ WEEK = WEEK current_date (r1) 
+-- r3 ← π id_medecin (r2) 
+-- r4 ← π id_medecin (MEDECIN) 
+-- r5  ← r4 − r3 
+
+
+---------------------------------------------------------------------------------
+------------------------------------ NATACHA ------------------------------------
+---------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------
+--------------------------------- JEAN-FRANCOIS ---------------------------------
+---------------------------------------------------------------------------------
 
 
 
