@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 				<!-- Footer -->
 				<div class="modal-footer bg-dark text-white">
 					<button class="btn btn-danger m-2" data-bs-dismiss="modal">Fermer</button>
-					<button class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#Equipage">Connexion</button>
+					<button class="btn btn-success m-2" data-bs-toggle="modal">Connexion</button>
 				</div>
 			</div>
 		</div>
@@ -207,15 +207,20 @@ document.addEventListener('DOMContentLoaded', function(e) {
 			<div class="modal-content p-1">
 				<!-- Header -->
 				<div class="modal-header bg-dark">
-					<h3 class="modal-title text-white">Creation de compte utilisateur</h3>
+					<h3 class="modal-title text-white">Creation de compte utilisateur Medecin</h3>
 					<button class="btn btn-close bg-white" data-bs-dismiss="modal"></button>
 				</div>
 				<!-- Body -->
 				<div class="modal-body p-0 d-flex flex-column">
 
 					<div class="col-12 p-2 d-flex">
-						<label class="form-label align-self-center col-3"><strong>Nom utilisateur:</strong></label>
+						<label class="form-label align-self-center col-3"><strong>Nom du Medecin:</strong></label>
 						<input id="inputNomCreation" type="text" class="form-control" placeholder="Entrez le nom" required>
+					</div>
+
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Prenom du Medecin:</strong></label>
+						<input id="inputPrenomCreation" type="text" class="form-control" placeholder="Entrez le nom" required>
 					</div>
 
 					<div class="col-12 p-2 d-flex">
@@ -240,17 +245,20 @@ document.addEventListener('DOMContentLoaded', function(e) {
 						<label class="form-label align-self-center col-3"><strong>Email:</strong></label>
 						<input id="email" type="email" class="form-control" placeholder="Entrez votre email" required>
 					</div>
-
-                    <div class="col-12 p-2 d-flex">
-						<label class="form-label align-self-center col-3"><strong>Email confirmation:</strong></label>
-						<input id="emailVerif" type="email" class="form-control" placeholder="Confirmez votre email" required>
+					<div class="col-12 p-2 d-flex">
+						<label class="form-label align-self-center col-3"><strong>Specialite:</strong></label>
+						<select id="id_specialite" class="form-control" required>
+							<option value="">Sélectionnez une spécialité</option>
+							<option value="1">Médecin généraliste</option>
+							<option value="2">Dermatologue</option>
+							<option value="3">Ophtalmologue</option>
+						</select>
 					</div>
-
 				</div>
 				<!-- Footer -->
 				<div class="modal-footer bg-dark text-white">
 					<button class="btn btn-danger m-2" data-bs-dismiss="modal">Fermer</button>
-					<button class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#Equipage">Creer un compte</button>
+					<button class="btn btn-success m-2" onclick="addMedecin()" data-bs-toggle="modal">Creer un compte</button>
 				</div>
 			</div>
 		</div>

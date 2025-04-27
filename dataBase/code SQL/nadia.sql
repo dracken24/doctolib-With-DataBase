@@ -10,7 +10,7 @@ set search_path to projet_final;
 
 CREATE TABLE annulation
 (
-	id_annulation     int  NOT NULL,
+	id_annulation     SERIAL NOT NULL,
 	date_annulation   date NOT NULL,
 	raison_annulation text NOT NULL,
 	id_rdv            INT  NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE annulation
 
 CREATE TABLE compte_rendu
 (
-	id_compterendu int  NOT NULL,
+	id_compterendu SERIAL NOT NULL,
 	contenu_cr     text NOT NULL,
 	date_redaction date NOT NULL,
 	id_rdv         INT  NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE compte_rendu
 
 CREATE TABLE consulte
 (
-	id_consulte int not null,
+	id_consulte SERIAL NOT NULL,
 	type_consultation INT NOT NULL,
 	id_medecin        INT NOT NULL,
 	id_ville          INT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE consulte
 
 CREATE TABLE medecin
 (
-	id_medecin     INT  NOT NULL,
+	id_medecin     SERIAL NOT NULL,
 	nom_medecin    text NOT NULL,
 	prenom_medecin text NOT NULL,
 	email_medecin  text NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE medecin
 
 CREATE TABLE notification
 (
-	id_notif    INT  NOT NULL,
+	id_notif    SERIAL NOT NULL,
 	contenue    TEXT NOT NULL,
 	date_envoie TIMESTAMP NOT NULL,
 	id_patient  int  NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE notification
 
 CREATE TABLE patient
 (
-	id_patient        int  NOT NULL,
+	id_patient        SERIAL NOT NULL,
 	nom_patient       TEXT NOT NULL,
 	prenom_patient    TEXT NOT NULL,
 	email_patient     TEXT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE patient
 
 CREATE TABLE plage_horaire
 (
-	id_plage    INT     NOT NULL,
+	id_plage    SERIAL NOT NULL,
 	heure_debut TIMESTAMP    NOT NULL,
 	heure_fin   TIMESTAMP    NOT NULL,
 	disponible  BOOLEAN NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE plage_horaire
 
 CREATE TABLE rendez_vous
 (
-	id_rdv      INT     NOT NULL,
+	id_rdv      SERIAL NOT NULL,
 	confirm_rdv BOOLEAN NOT NULL DEFAULT false,
 	id_plage    INT     NOT NULL,
 	id_patient  int     NOT NULL,
@@ -91,14 +91,14 @@ CREATE TABLE rendez_vous
 
 CREATE TABLE specialite
 (
-	id_specialite  INT  NOT NULL,
+	id_specialite  SERIAL  NOT NULL,
 	nom_specialite TEXT NOT NULL,
 	PRIMARY KEY (id_specialite)
 );
 
 CREATE TABLE ville
 (
-	id_ville  INT  NOT NULL,
+	id_ville  SERIAL  NOT NULL,
 	nom_ville TEXT NOT NULL,
 	PRIMARY KEY (id_ville)
 );
@@ -170,66 +170,66 @@ commit;
 
 ------------------------------------------------------------------------
 
-INSERT INTO specialite (id_specialite, nom_specialite) VALUES 
-	(1, 'generale'),
-	(2, 'familiale'),
-	(3, 'endocrinologie'),
-	(4, 'alergologue'),
-	(5, 'orl'),
-	(6, 'Chirurgien-dentiste')
+INSERT INTO specialite (nom_specialite) VALUES 
+	('generale'),
+	('familiale'),
+	('endocrinologie'),
+	('alergologue'),
+	('orl'),
+	('Chirurgien-dentiste')
 ;
 
-INSERT INTO medecin (id_medecin, nom_medecin, prenom_medecin,email_medecin, id_specialite) VALUES 
-	(1, 'Norris', 'Chuck', 'god@supergod.god', 1),
-	(2, 'Tremblay', 'Tony', 'aaa@aaaaaa.aaa', 4),
-	(3, 'Smith', 'John', 'bbbbb@bbbbbb.bbb', 5),
-	(4, 'Pigeon', 'Alice', 'ccc@cccccc.ccc', 2)
+INSERT INTO medecin (nom_medecin, prenom_medecin,email_medecin, id_specialite) VALUES 
+	('Norris', 'Chuck', 'god@supergod.god', 1),
+	('Tremblay', 'Tony', 'aaa@aaaaaa.aaa', 4),
+	('Smith', 'John', 'bbbbb@bbbbbb.bbb', 5),
+	('Pigeon', 'Alice', 'ccc@cccccc.ccc', 2)
 ;
 
-INSERT INTO ville (id_ville, nom_ville) VALUES 
-	(1, 'Quebec'),
-	(2, 'Montreal'),
-	(3, 'Sainte-Marie'),
-	(4, 'Trois-Riviere'),
-	(5, 'Alma'),
-	(6, 'Chicoutimi'),
-	(7, 'Saint-Nean')
+INSERT INTO ville (nom_ville) VALUES 
+	('Quebec'),
+	('Montreal'),
+	('Sainte-Marie'),
+	('Trois-Riviere'),
+	('Alma'),
+	('Chicoutimi'),
+	('Saint-Nean')
 ;
 
-INSERT INTO patient (id_patient, nom_patient, prenom_patient, email_patient, telephone_patient, remarque, id_ville) VALUES 
-	(1, 'Bouchard', 'Bob', 'god@supergod.god', '111-1111-111', null, 2),
-	(2, 'Tremblay', 'Annie', 'ddd@aaaaaa.aaa', '222-2222-222', 'Pas mal tanante.', 4),
-	(3, 'Shark', 'Baby', 'ssss@lllll.lll', '333-3333-333', null, 5),
-	(4, 'Lee', 'Bruce', 'lll@lllll.lll', '444-4444-444', 'Toujours en retard.', 2),
-	(5, 'Monkey.D', 'Luffy', 'vogue@merry.op', '555-5555-555', 'Un peu srupide mais attachant.', 2)
+INSERT INTO patient (nom_patient, prenom_patient, email_patient, telephone_patient, remarque, id_ville) VALUES 
+	('Bouchard', 'Bob', 'god@supergod.god', '111-1111-111', null, 2),
+	('Tremblay', 'Annie', 'ddd@aaaaaa.aaa', '222-2222-222', 'Pas mal tanante.', 4),
+	('Shark', 'Baby', 'ssss@lllll.lll', '333-3333-333', null, 5),
+	('Lee', 'Bruce', 'lll@lllll.lll', '444-4444-444', 'Toujours en retard.', 2),
+	('Monkey.D', 'Luffy', 'vogue@merry.op', '555-5555-555', 'Un peu srupide mais attachant.', 2)
 ;
 
-Insert into consulte (id_consulte, type_consultation, id_medecin, id_ville) values
-	(1, 0, 1,1),
-	(2, 1, 3,2),
-	(3, 1, 4,4)
+Insert into consulte (type_consultation, id_medecin, id_ville) values
+	(0, 1,1),
+	(1, 3,2),
+	(1, 4,4)
 ;
 
-Insert into plage_horaire (id_plage, heure_debut, heure_fin, disponible, id_medecin, id_consulter) values
-	(1, '2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 1, 1),
-	(2, '2023-07-01 10:00:00', '2023-07-01 11:00:00', false, 3, 2),
-	(3, '2023-07-02 10:00:00', '2023-07-02 11:00:00', true, 3, 2),
-	(4, '2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 4, 3),
-	(5, '2023-06-01 09:00:00', '2023-06-01 10:00:00', true, 1, 1),
-	(6, '2023-08-01 10:00:00', '2023-08-01 11:00:00', false, 3, 2),
-	(7, '2023-08-02 10:00:00', '2023-08-02 11:00:00', true, 3, 2),
-	(8, '2023-06-01 09:00:00', '2023-06-01 10:00:00', true, 4, 3)
+Insert into plage_horaire (heure_debut, heure_fin, disponible, id_medecin, id_consulter) values
+	('2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 1, 1),
+	('2023-07-01 10:00:00', '2023-07-01 11:00:00', false, 3, 2),
+	('2023-07-02 10:00:00', '2023-07-02 11:00:00', true, 3, 2),
+	('2023-05-01 09:00:00', '2023-05-01 10:00:00', true, 4, 3),
+	('2023-06-01 09:00:00', '2023-06-01 10:00:00', true, 1, 1),
+	('2023-08-01 10:00:00', '2023-08-01 11:00:00', false, 3, 2),
+	('2023-08-02 10:00:00', '2023-08-02 11:00:00', true, 3, 2),
+	('2023-06-01 09:00:00', '2023-06-01 10:00:00', true, 4, 3)
 ;
 
-Insert into rendez_vous (id_rdv, confirm_rdv, id_plage, id_patient) values
-	(1, true, 1, 5),
-	(2, false, 2, 3),
-	(3, true, 3, 3),
-	(4, true, 4, 2),
-	(5, true, 5, 5),
-	(6, false, 6, 3),
-	(7, true, 7, 3),
-	(8, true, 8, 2)
+Insert into rendez_vous (confirm_rdv, id_plage, id_patient) values
+	(true, 1, 5),
+	(false, 2, 3),
+	(true, 3, 3),
+	(true, 4, 2),
+	(true, 5, 5),
+	(false, 6, 3),
+	(true, 7, 3),
+	(true, 8, 2)
 ;
 
 select * from annulation;
