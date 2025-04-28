@@ -28,19 +28,57 @@
 
                     <!-- Filtres statiques -->
                     <div>
-                        <!-- <a class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a> -->
                         <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Filtres</button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item">Par spécialité</a></li>
-                                    <li><a class="dropdown-item">Par ville</a></li>
-                                    <!-- <li><a class="dropdown-item">Par nom</a></li> -->
+                                    <li><a class="dropdown-item" id="sortBySpeciality">Par spécialité</a></li>
+                                    <li><a class="dropdown-item" id="sortByVille">Par ville</a></li>
+                                    <!-- <li><a class="dropdown-item" id="sortByName">Par nom</a></li> -->
                                 </ul>
+                        <button class="btn" id="resetBtn">Reset</button>
                     </div>
 
                     <!-- Carte Container -->
                     <div class="shadow-lg border container p-3">
                         <!-- Carte Deck -->
-                        <div id="doc-card-deck" class="card-deck row d-flex m-0 gap-4 justify-content-center"> <!-- Cards go below here -->
+                        <div id="doc_card_deck" class="card-deck row d-flex m-0 gap-4 justify-content-center"> 
+                        <!-- Cards go here -->
+
+                        <div class="doc_card card border-dark m-1 p-0">
+                            <img src="https://shorturl.at/RuFY9" class="doc_card_pic card-img-top" alt="default avatar picture">
+                            <div class="card-body position-relative">
+                                <h3 class="doc_card_nom card-title mb-2">${item.nom}</h3>
+                                <div class="position-absolute bottom-0 pb-3">
+                                    <p class="doc_card_specialite lead mb-0">${item.specialite}</p>
+                                    <p class="doc_card_ville card-text">${item.ville}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <center>
+                                <button type="button" class="btn btn-primary" onclick="location.href='booking.html'">
+                                    Prendre rendez-vous
+                                </button>
+                                </center>
+                            </div>
+                        </div>
+
+                        <div class="doc_card card border-dark m-1 p-0">
+                            <img src="https://shorturl.at/RuFY9" class="doc_card_pic card-img-top" alt="default avatar picture">
+                            <div class="card-body position-relative">
+                                <h3 class="doc_card_nom card-title mb-2">${item.nom}</h3>
+                                <div class="position-absolute bottom-0 pb-3">
+                                    <p class="doc_card_specialite lead mb-0">${item.specialite}</p>
+                                    <p class="doc_card_ville card-text">${item.ville}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <center>
+                                <button type="button" class="btn btn-primary" onclick="location.href='booking.html'">
+                                    Prendre rendez-vous
+                                </button>
+                                </center>
+                            </div>
+                        </div>
+                
 
                         </div>
                     </div>
