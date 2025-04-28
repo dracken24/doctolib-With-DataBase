@@ -35,14 +35,14 @@ function addMedecin()
 /***                      données des médecins/docteurs                     ***/
 /******************************************************************************/
 function afficherCartes (){
-    // const medecins = JSON.parse(localStorage.getItem("medecins"));
-    const container = document.querySelector('.card-deck');
+    // const container = document.querySelector('.card-deck');
+    const container = document.getElementById('doc-card-deck');
     container.innerHTML = "";
-    // alert("Test: pause") // Pour test runs
+    // alert("Test: pause and load") // Pour test runs
     medecins.forEach(item => {
         container.innerHTML = container.innerHTML + `
-        <div class="card border-dark m-1 p-0" style="width: 18em; height: 465px;">
-            <img src="https://shorturl.at/RuFY9" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+        <div id="doc-card" class="card border-dark m-1 p-0">
+            <img id="doc-card-pic" src="https://shorturl.at/RuFY9" class="card-img-top" alt="default">
             <div class="card-body position-relative">
                 <h3 class="card-title mb-2">${item.nom}</h5>
                 <div class="position-absolute bottom-0 pb-3">
@@ -52,7 +52,7 @@ function afficherCartes (){
             </div>
             <div class="card-footer">
                 <center>
-                <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                <button type="button" class="btn btn-primary" onclick="location.href='booking.html'">
                     Prendre rendez-vous
                 </button>
                 </center>
@@ -61,6 +61,7 @@ function afficherCartes (){
     `
     })
 }
+
 afficherCartes();
 
 /*******************************************************************************/
