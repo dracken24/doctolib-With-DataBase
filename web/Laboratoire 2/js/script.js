@@ -27,11 +27,46 @@ function addMedecin()
     });
 }
 
-/*******************************************************************************/
-/***                                  NATACHA                                ***/
-/*******************************************************************************/
+/******************************************************************************/
+/***                                  NATACHA                               ***/
+/******************************************************************************/
 
+/******************************************************************************/
+/***                      données des médecins/docteurs                     ***/
+/******************************************************************************/
+function afficherCartes (){
+    // const medecins = JSON.parse(localStorage.getItem("medecins"));
+    const container = document.querySelector('.card-deck');
+    container.innerHTML = "";
+    // alert("Test: pause") // Pour test runs
+    medecins.forEach(item => {
+        container.innerHTML = container.innerHTML + `
+        <div class="card border-dark m-1 p-0" style="width: 18em; height: 465px;">
+            <img src="https://shorturl.at/RuFY9" class="card-img-top" style="height: 250px; object-fit: cover;" alt="default">
+            <div class="card-body position-relative">
+                <h3 class="card-title mb-2">${item.nom}</h5>
+                <div class="position-absolute bottom-0 pb-3">
+                    <p class="lead mb-0">${item.specialite}</p>
+                    <p class="card-text">${item.ville}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <center>
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='booking.html'">
+                    Prendre rendez-vous
+                </button>
+                </center>
+            </div>
+        </div>
+    `
+    })
+}
+afficherCartes();
 
+/*******************************************************************************/
+/***                                 [WIP]                                   ***/
+/*******************************************************************************/
+// <-- x -->
 
 /*******************************************************************************/
 /***                               JEAN-FRANCOIS                             ***/
