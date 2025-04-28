@@ -87,7 +87,6 @@ document.getElementById('sortBySpeciality').addEventListener('click', function()
 
     // Create new rows for each specialty
     sortedSpecialities.forEach(speciality => {
-        // Create a new row for the specialty
         const specialityRow = document.createElement('div');
         specialityRow.className = 'row mb-4'; // Add some margin for spacing
 
@@ -126,7 +125,6 @@ document.getElementById('sortByVille').addEventListener('click', function() {
 
     // Create new rows for each town
     sortedSpecialities.forEach(ville => {
-        // Create a new row for the town
         const villeRow = document.createElement('div');
         villeRow.className = 'row mb-4'; // Add some margin for spacing
 
@@ -145,7 +143,9 @@ document.getElementById('sortByVille').addEventListener('click', function() {
     });
 });
 
-
+/******************************************************************************/
+/***                            Reset Filters                               ***/
+/******************************************************************************/
 // Store the original order of the cards
 let originalCards = [];
 
