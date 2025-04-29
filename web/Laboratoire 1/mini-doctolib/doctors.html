@@ -30,17 +30,17 @@
                     <div>
                         <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Filtres</button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" id="sortBySpeciality">Par spécialité</a></li>
-                                    <li><a class="dropdown-item" id="sortByVille">Par ville</a></li>
+                                    <li><a class="dropdown-item" id="sortBySpeciality" onclick="filtreSpecialite()">Par spécialité</a></li>
+                                    <li><a class="dropdown-item" id="sortByVille" onclick="filtreVille()">Par ville</a></li>
                                     <!-- <li><a class="dropdown-item" id="sortByName">Par nom</a></li> -->
                                 </ul>
-                        <button class="btn" id="resetBtn">Reset</button>
+                        <button class="btn" id="resetBtn" onclick="resetCards()">Reset</button>
                     </div>
 
                     <!-- Carte Container -->
                     <div class="shadow-lg border container p-3">
                         <!-- Carte Deck -->
-                        <div id="doc_card_deck" class="card-deck row d-flex m-0 gap-4 justify-content-center"> 
+                        <div id="doc_card_deck" class="card-deck row d-flex m-0 gap-4 justify-content-center">
                         <!-- Cards go here -->
 
                         </div>

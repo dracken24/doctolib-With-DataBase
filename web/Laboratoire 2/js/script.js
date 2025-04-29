@@ -64,11 +64,37 @@ function afficherCartes (){
 afficherCartes();
 
 /******************************************************************************/
-/***                              Button Filtres                            ***/
+/***                        Cartes Alphabetiques                            ***/
+/******************************************************************************/
+function sortCardsByName() {
+    const cardDeck = document.getElementById('doc_card_deck');
+    const cards = Array.from(cardDeck.getElementsByClassName('doc_card'));
+
+    // Sort cards by name (or any other property you want)
+    cards.sort((a, b) => {
+        const nameA = a.querySelector('.doc_card_nom').textContent.trim().toLowerCase();
+        const nameB = b.querySelector('.doc_card_nom').textContent.trim().toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+
+    // Clear the current card deck
+    cardDeck.innerHTML = '';
+
+    // Append the sorted cards back to the card deck
+    cards.forEach(card => {
+        cardDeck.appendChild(card);
+    });
+}
+
+sortCardsByName();
+/******************************************************************************/
+/***                            By Specialite                               ***/
 /******************************************************************************/
 const cardDeck = document.getElementById('doc_card_deck');
 
-document.getElementById('sortBySpeciality').addEventListener('click', function() {
+function filtreSpecialite() {
+    sortCardsByName();
+
     const cardDeck = document.getElementById('doc_card_deck');
     const cards = Array.from(cardDeck.getElementsByClassName('doc_card'));
 
@@ -76,9 +102,7 @@ document.getElementById('sortBySpeciality').addEventListener('click', function()
     const groupedCards = {};
     cards.forEach(card => {
         const speciality = card.querySelector('.doc_card_specialite').textContent.trim();
-        if (!groupedCards[speciality]) {
-            groupedCards[speciality] = [];
-        }
+        if (!groupedCards[speciality]) {groupedCards[speciality] = [];}
         groupedCards[speciality].push(card);
     });
 
@@ -88,7 +112,7 @@ document.getElementById('sortBySpeciality').addEventListener('click', function()
     // Create new rows for each specialty
     sortedSpecialities.forEach(speciality => {
         const specialityRow = document.createElement('div');
-        specialityRow.className = 'row mb-4'; // Add some margin for spacing
+        specialityRow.className = 'row mb-4';
 
         // Create a header for the specialty
         const specialityHeader = document.createElement('h4');
@@ -96,17 +120,19 @@ document.getElementById('sortBySpeciality').addEventListener('click', function()
         specialityRow.appendChild(specialityHeader);
 
         // Append each card of the specialty to the row
-        groupedCards[speciality].forEach(card => {
-            specialityRow.appendChild(card);
-        });
+        groupedCards[speciality].forEach(card => {specialityRow.appendChild(card);});
 
         // Append the specialty row to the card deck
         cardDeck.appendChild(specialityRow);
     });
-});
+}
 
+/******************************************************************************/
+/***                                By Ville                                ***/
+/******************************************************************************/
+function filtreVille() {
+    sortCardsByName();
 
-document.getElementById('sortByVille').addEventListener('click', function() {
     const cardDeck = document.getElementById('doc_card_deck');
     const cards = Array.from(cardDeck.getElementsByClassName('doc_card'));
 
@@ -114,9 +140,7 @@ document.getElementById('sortByVille').addEventListener('click', function() {
     const groupedCards = {};
     cards.forEach(card => {
         const ville = card.querySelector('.doc_card_ville').textContent.trim();
-        if (!groupedCards[ville]) {
-            groupedCards[ville] = [];
-        }
+        if (!groupedCards[ville]) {groupedCards[ville] = [];}
         groupedCards[ville].push(card);
     });
 
@@ -126,7 +150,7 @@ document.getElementById('sortByVille').addEventListener('click', function() {
     // Create new rows for each town
     sortedSpecialities.forEach(ville => {
         const villeRow = document.createElement('div');
-        villeRow.className = 'row mb-4'; // Add some margin for spacing
+        villeRow.className = 'row mb-4';
 
         // Create a header for the town
         const villeHeader = document.createElement('h4');
@@ -134,17 +158,15 @@ document.getElementById('sortByVille').addEventListener('click', function() {
         villeRow.appendChild(villeHeader);
 
         // Append each card of the town to the row
-        groupedCards[ville].forEach(card => {
-            villeRow.appendChild(card);
-        });
+        groupedCards[ville].forEach(card => {villeRow.appendChild(card);});
 
         // Append the town row to the card deck
         cardDeck.appendChild(villeRow);
     });
-});
+}
 
 /******************************************************************************/
-/***                            Reset Filters                               ***/
+/***                            Reset Filtres                               ***/
 /******************************************************************************/
 // Store the original order of the cards
 let originalCards = [];
@@ -159,8 +181,7 @@ function initializeOriginalCards() {
 // Call the function to initialize the original cards when the page loads
 document.addEventListener('DOMContentLoaded', initializeOriginalCards);
 
-// Event listener for the reset button
-document.getElementById('resetBtn').addEventListener('click', function() {
+function resetCards() {
     const cardDeck = document.getElementById('doc_card_deck');
     cardDeck.innerHTML = ''; // Clear the current card deck
 
@@ -168,7 +189,7 @@ document.getElementById('resetBtn').addEventListener('click', function() {
     originalCards.forEach(card => {
         cardDeck.appendChild(card);
     });
-});
+}
 
 /******************************************************************************/
 /***                                 [WIP]                                  ***/
