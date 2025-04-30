@@ -79,6 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
+           
+            <button id="darkModeToggle" class="btn btn-light position-fixed top-0 end-0 m-3" style="z-index:9999;">
+                <i id="darkModeIcon" class="fas fa-moon"></i>
+            </button>
         </nav>
     `;
 });
@@ -296,75 +300,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
 /***                                  NATACHA                               ***/
 /******************************************************************************/
 
-/******************************************************************************/
-/***                      données des médecins/docteurs                     ***/
-/******************************************************************************/
-const medecins = [
-    {
-		nom: "Dr. Aymen Rabah",
-		specialite: "Diabétologue",
-		ville: "Montréal",
-		disponibilites: {
-		"2025-04-10": ["09:00", "10:00", "14:00"],
-		"2025-04-11": ["11:00", "15:30"],
-		}
-    },
-    {
-		nom: "Dr. Danielle Nicole Jones",
-		specialite: "Gynécologue",
-		ville: "Montréal",
-		disponibilites: {
-		"2025-04-07": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
-		"2025-04-08": ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
-		"2025-04-09": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
-		"2025-04-10": ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
-		"2025-04-11": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
-		}
-    },
-    {
-		nom: "Dr. Martine Hubert",
-		specialite: "Médecin généraliste",
-		ville: "Boucherville",
-		disponibilites: {
-		"2025-04-07": ["12:00", "15:00"],
-		"2025-04-08": ["10:00", "12:00", "13:00", "14:00"],
-		"2025-04-09": ["10:00", "12:00", "13:00", "14:00", "15:00"],
-		"2025-04-10": ["12:00", "14:00", "15:00"],
-		"2025-04-11": ["10:00", "11:00", "12:00", "13:00"],
-		}
-    },
-    {
-		nom: "Dr. Natacha Meyer",
-		specialite: "Gynécologue",
-		ville: "Boucherville",
-		disponibilites: {
-		"2025-04-12": ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"],
-		"2025-04-13": ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"],
-		}
-    },
-    {
-		nom: "Dr. Nadia Desjardins",
-		specialite: "Ostéopathe",
-		ville: "Laval",
-		disponibilites: {
-		"2025-04-07": ["09:00", "09:30"],
-		"2025-04-09": ["11:00", "11:30"],
-		"2025-04-11": ["13:00", "13:30"],
-		"2025-04-13": ["15:00", "15:30"],
-		}
-    },
-    {
-		nom: "Dr. Jean-François Lefebvre",
-		specialite: "Médecin généraliste",
-		ville: "Montréal",
-		disponibilites: {
-		"2025-04-08": ["10:00", "10:30", "12:00", "12:30"],
-		"2025-04-10": ["12:30", "14:00", "14:30", "16:00"],
-		"2025-04-12": ["16:00", "16:30"],
-		}
-    }
-    ];
-
 /*******************************************************************************/
 /***                                 [WIP]                                   ***/
 /*******************************************************************************/
@@ -376,3 +311,295 @@ const medecins = [
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    //  Gestion du Dark Mode
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const icon = document.getElementById('darkModeIcon');
+    const body = document.body;
+  
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  
+    toggleBtn?.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      icon.classList.toggle('fa-moon', !isDark);
+      icon.classList.toggle('fa-sun', isDark);
+      localStorage.setItem('darkMode', isDark);
+    });
+  
+    //  Fonction utilitaire pour normaliser les chaînes
+    function normalizeString(str) {
+      return str
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+    }
+  
+    //  Sélecteurs du formulaire
+  const selectSpecialite = document.getElementById('specialite');
+  const selectMedecin = document.getElementById('medecin');
+  const selectDate = document.getElementById('date');
+  const selectHeure = document.getElementById('heure');
+  const messageErreur = document.createElement('p');
+  messageErreur.className = 'text-danger mt-2';
+  selectHeure?.parentElement?.appendChild(messageErreur);
+  
+  //  Nettoyage du formulaire au chargement
+  selectSpecialite.innerHTML = '<option value="">Sélectionnez une spécialité</option>';
+  selectMedecin.innerHTML = '<option value="">Sélectionnez un médecin</option>';
+  selectDate.value = '';
+  selectHeure.innerHTML = '';
+  messageErreur.textContent = '';
+  localStorage.removeItem('medecin_id');
+  
+  
+    //  Générer dynamiquement les spécialités
+    const specialitesUniques = [...new Set(medecins.map(m => m.specialite))];
+    selectSpecialite.innerHTML = '<option value="">Sélectionnez une spécialité</option>';
+    specialitesUniques.forEach(spe => {
+      const option = document.createElement('option');
+      option.value = normalizeString(spe);
+      option.textContent = spe;
+      selectSpecialite.appendChild(option);
+    });
+  
+    //  Filtrer les médecins selon la spécialité
+    selectSpecialite.addEventListener('change', () => {
+      const specialiteChoisie = selectSpecialite.value;
+      selectMedecin.innerHTML = '<option value="">Sélectionnez un médecin</option>';
+      selectDate.innerHTML = '<option value="">Sélectionnez une date</option>';
+      selectHeure.innerHTML = '<option value="">Sélectionnez une heure</option>';
+      messageErreur.textContent = '';
+  
+      const medecinsFiltres = medecins.filter(m => normalizeString(m.specialite) === specialiteChoisie);
+      medecinsFiltres.forEach(m => {
+        const option = document.createElement('option');
+        option.value = m.id;
+        option.textContent = m.nom;
+        selectMedecin.appendChild(option);
+      });
+    });
+  
+    //  Afficher les dates disponibles selon le médecin
+    selectMedecin.addEventListener('change', () => {
+      const idMedecin = parseInt(selectMedecin.value);
+      const med = medecins.find(m => m.id === idMedecin);
+  
+      selectDate.innerHTML = '<option value="">Sélectionnez une date</option>';
+      selectHeure.innerHTML = '<option value="">Sélectionnez une heure</option>';
+      messageErreur.textContent = '';
+  
+      if (med) {
+        const dates = Object.keys(med.disponibilites);
+        dates.forEach(date => {
+          const option = document.createElement('option');
+          option.value = date;
+          option.textContent = date;
+          selectDate.appendChild(option);
+        });
+      }
+    });
+  
+    //  Afficher les horaires disponibles pour une date donnée
+    selectDate.addEventListener('change', () => {
+      const idMedecin = parseInt(selectMedecin.value);
+      const dateChoisie = selectDate.value;
+      const med = medecins.find(m => m.id === idMedecin);
+  
+      selectHeure.innerHTML = '<option value="">Sélectionnez une heure</option>';
+      messageErreur.textContent = '';
+  
+      if (med && med.disponibilites[dateChoisie]) {
+        let heures = med.disponibilites[dateChoisie];
+        const rdvOccupees = JSON.parse(localStorage.getItem("rdv_occupees")) || {};
+        const heuresPrises = rdvOccupees[idMedecin]?.[dateChoisie] || [];
+        
+        heures = heures.filter(h => !heuresPrises.includes(h));
+        heures.forEach(h => {
+          const option = document.createElement('option');
+          option.value = h;
+          option.textContent = h;
+          selectHeure.appendChild(option);
+        });
+        if (heures.length === 0) {
+            messageErreur.textContent = 'Tous les créneaux sont déjà pris pour cette date.';
+          }
+          
+      } else {
+        messageErreur.textContent = 'Aucune plage horaire disponible pour cette date.';
+      }
+    });
+  
+    // Pré-remplir depuis URL ou localStorage
+    function preselectionDepuisURLouStorage() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id') || localStorage.getItem('medecin_id');
+      if (id !== null) {
+        const med = medecins.find(m => m.id === parseInt(id));
+        if (med) {
+          const specialiteNormalisee = normalizeString(med.specialite);
+          selectSpecialite.value = specialiteNormalisee;
+          selectSpecialite.dispatchEvent(new Event('change'));
+  
+          setTimeout(() => {
+            selectMedecin.value = med.id;
+            selectMedecin.dispatchEvent(new Event('change'));
+          }, 100);
+        }
+      }
+    }
+  
+    function enregistrerRendezVous() {
+      const rendezVous = {
+        nom: document.getElementById('nom').value,
+        prenom: document.getElementById('prenom').value,
+        email: document.getElementById('emailbooking').value,
+        tel: document.getElementById('tel').value,
+        specialite: selectSpecialite.options[selectSpecialite.selectedIndex].text,
+        medecin: selectMedecin.options[selectMedecin.selectedIndex].text,
+        date: selectDate.value,
+        heure: selectHeure.value,
+        message: document.getElementById('message').value,
+      };
+    
+      // Récupérer la liste actuelle
+      const anciensRdv = JSON.parse(localStorage.getItem('rendezvous')) || [];
+      anciensRdv.push(rendezVous);
+      localStorage.setItem('rendezvous', JSON.stringify(anciensRdv));
+    }
+  
+    //  Gestion du bouton "Confirmer"
+  const boutonConfirmer = document.querySelector('button.btn-success[data-bs-target="#confirmation"]');
+  
+  if (boutonConfirmer) {
+    boutonConfirmer.addEventListener('click', (e) => {
+      
+      // Récupère les valeurs
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const email = document.getElementById('emailbooking').value.trim();
+      const tel = document.getElementById('tel').value.trim();
+      const specialite = document.getElementById('specialite').value;
+      const medecin = document.getElementById('medecin').value;
+      const date = document.getElementById('date').value;
+      const heure = document.getElementById('heure').value;
+      const message = document.getElementById('message').value.trim();
+
+      // Vérifie si un champ est vide
+      if (!nom || !prenom || !email || !tel || !specialite || !medecin || !date || !heure || !message) {
+        alert("Merci de remplir tous les champs !");
+        e.preventDefault(); // Empêche la redirection
+        return;
+      }
+
+      const rendezVous = {
+        nom,
+        prenom,
+        email,
+        tel,
+        specialite,
+        medecin,
+        date,
+        heure,
+        message
+      };
+    
+      // Récupérer la liste actuelle
+      const anciensRdv = JSON.parse(localStorage.getItem('rendezvous')) || [];
+      anciensRdv.push(rendezVous);
+      localStorage.setItem('rendezvous', JSON.stringify(anciensRdv));
+
+      localStorage.setItem('rdv', JSON.stringify(rendezVous));
+      window.location.href = 'confirmation.html';
+    });
+  }
+const btnRecap = document.getElementById('btnRecap');
+const modalBody = document.getElementById('recap-body');
+
+
+// Bouton recap
+btnRecap?.addEventListener('click', () => {
+  const nom = document.getElementById('nom').value;
+  const prenom = document.getElementById('prenom').value;
+  const email = document.getElementById('emailbooking').value;
+  const tel = document.getElementById('tel').value;
+  const specialite = document.getElementById('specialite').selectedOptions[0]?.textContent;
+  const medecin = document.getElementById('medecin').selectedOptions[0]?.textContent;
+  const date = document.getElementById('date').value;
+  const heure = document.getElementById('heure').value;
+  const message = document.getElementById('message')?.value || '';
+
+  const recap = { nom, prenom, email, tel, specialite, medecin, date, heure, message };
+  localStorage.setItem('rdv', JSON.stringify(recap)); // pour la page confirmation
+
+  // Afficher le recap
+  modalBody.innerHTML = `
+    <div class="alert alert-info">
+      <h5 class="mb-3">Récapitulatif de votre rendez-vous :</h5>
+      <p><strong>Nom :</strong> ${nom} ${prenom}</p>
+      <p><strong>Email :</strong> ${email}</p>
+      <p><strong>Téléphone :</strong> ${tel}</p>
+      <p><strong>Spécialité :</strong> ${specialite}</p>
+      <p><strong>Médecin :</strong> ${medecin}</p>
+      <p><strong>Date :</strong> ${date}</p>
+      <p><strong>Heure :</strong> ${heure}</p>
+      <p><strong>Message :</strong> ${message || 'Aucun message.'}</p>
+    </div>
+  `;
+});
+
+// Bouton confirmFinal
+document.getElementById('confirmFinal')?.addEventListener('click', () => {
+  // Met à jour les créneaux occupés
+const idMedecin = document.getElementById("medecin").value;
+const dateChoisie = document.getElementById("date").value;
+const heureChoisie = document.getElementById("heure").value;
+
+let rdvOccupees = JSON.parse(localStorage.getItem("rdv_occupees")) || {};
+
+if (!rdvOccupees[idMedecin]) {
+  rdvOccupees[idMedecin] = {};
+}
+if (!rdvOccupees[idMedecin][dateChoisie]) {
+  rdvOccupees[idMedecin][dateChoisie] = [];
+}
+if (!rdvOccupees[idMedecin][dateChoisie].includes(heureChoisie)) {
+  rdvOccupees[idMedecin][dateChoisie].push(heureChoisie);
+}
+
+localStorage.setItem("rdv_occupees", JSON.stringify(rdvOccupees));
+
+
+
+
+    window.location.href = 'confirmation.html';
+});
+
+
+//Bouton recap
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    if (this.checkValidity()) {
+        var recapModal = new bootstrap.Modal(document.getElementById('recap'));
+        recapModal.show();
+    } else {
+        this.reportValidity(); 
+    }
+});
+
+//Bouton annuler
+document.getElementById('annuler').addEventListener('click', function() {
+    var recapModal = bootstrap.Modal.getInstance(document.getElementById('recap'));
+    recapModal.hide();
+
+    setTimeout(function() {
+        var rdvModal = new bootstrap.Modal(document.getElementById('rendez-vous'));
+        rdvModal.show();
+    }, 400); 
+});
+});

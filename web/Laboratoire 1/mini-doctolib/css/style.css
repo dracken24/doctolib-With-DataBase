@@ -80,3 +80,74 @@ body.loaded {
     object-fit: cover;
     /* border-radius: 25px; */
 }
+.specialite {
+  perspective: 800px; /* Pour l'effet 3D */
+  transition: transform 1.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+  will-change: transform;
+}
+
+.specialite .justify-content-center {
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1);
+  will-change: transform;
+}
+
+.specialite:hover {
+  transform: scale(1.08) rotateY(360deg);
+  z-index: 2;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.specialite:hover .justify-content-center {
+  /* Optionnel : un petit zoom sur le contenu aussi */
+  transform: scale(1.05);
+}
+
+.specialite {
+    transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+    will-change: transform;
+    cursor: pointer;
+  }
+  
+  .specialite:hover {
+    transform: scale(1.08);
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+
+  /******************************************************************************/
+/***                        Dark Mode                                        ***/
+/******************************************************************************/
+body.dark-mode {
+    background: #181a1b !important;
+    color: #f1f1f1 !important;
+  }
+  
+  body.dark-mode .specialite {
+    background: #23272b !important;
+    border-color: #444 !important;
+  }
+  
+  body.dark-mode h1, 
+  body.dark-mode h2, 
+  body.dark-mode h4, 
+  body.dark-mode p {
+    color: #f1f1f1 !important;
+  }
+  
+
+  /* Bouton Prise de rendez-vous */
+.rv-btn {
+    width: 250px;   
+    height: 100px;   
+    font-size: 1.3rem; 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+  
