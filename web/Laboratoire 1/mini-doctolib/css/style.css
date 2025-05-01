@@ -73,13 +73,16 @@ body.loaded {
 /******************************************************************************/
 .doc_card {
     width: 288px;
-    height: 465px;}
+    /* height: 465px; */
+    height: 435px;
+    overflow: auto;
+  }
 
 .doc_card_pic {
     height: 250px;
     object-fit: cover;
-    /* border-radius: 25px; */
 }
+
 .specialite {
   perspective: 800px; /* Pour l'effet 3D */
   transition: transform 1.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;

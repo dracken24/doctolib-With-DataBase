@@ -40,16 +40,16 @@ function afficherCartes (){
 
     medecins.forEach(item => {
         container.innerHTML = container.innerHTML + `
-        <div class="doc_card card border-dark m-1 p-0">
+        <div class="doc_card card border-dark m-1 p-0" style="display: block;">
             <img src="https://shorturl.at/RuFY9" class="doc_card_pic card-img-top" alt="default avatar picture">
             <div class="card-body position-relative">
                 <h3 class="doc_card_nom card-title mb-2">${item.nom}</h3>
-                <div class="position-absolute bottom-0 pb-3">
+                <div>
                     <p class="doc_card_specialite lead mb-0">${item.specialite}</p>
                     <p class="doc_card_ville card-text">${item.ville}</p>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer position-relative">
                 <center>
                 <button type="button" class="btn btn-primary" onclick="location.href='booking.html'">
                     Prendre rendez-vous
@@ -86,7 +86,7 @@ function sortCardsByName() {
     });
 }
 
-sortCardsByName();
+// sortCardsByName();
 /******************************************************************************/
 /***                            By Specialite                               ***/
 /******************************************************************************/
@@ -190,6 +190,33 @@ function resetCards() {
         cardDeck.appendChild(card);
     });
 }
+
+/******************************************************************************/
+/***                             searchbar                                  ***/
+/******************************************************************************/
+function searching() {
+    const searchValue = document.getElementById('search').value.toLowerCase();
+    // const cards = document.querySelectorAll('#doc_card_deck .doc_card');
+
+    const cardDeck = document.getElementById('doc_card_deck');
+    const cards = Array.from(cardDeck.getElementsByClassName('doc_card'));
+
+    cards.forEach(card => {
+        const nom = card.querySelector('.doc_card_nom').textContent.toLowerCase();
+        const ville = card.querySelector('.doc_card_ville').textContent.toLowerCase();
+        const specialite = card.querySelector('.doc_card_specialite').textContent.toLowerCase();
+        // const nom = card.getElementsByClassName('.doc_card_nom').textContent.toLowerCase();
+        // const ville = card.getElementsByClassName('.doc_card_ville').textContent.toLowerCase();
+        // const specialite = card.getElementsByClassName('.doc_card_specialite').textContent.toLowerCase();
+
+        if (nom.includes(searchValue) || specialite.includes(searchValue) || ville.includes(searchValue)) {
+            card.style.display = 'block'; // Show the card
+        } else {
+            card.style.display = 'none'; // Hide the card
+        }
+    });
+}
+
 
 /******************************************************************************/
 /***                                 [WIP]                                  ***/

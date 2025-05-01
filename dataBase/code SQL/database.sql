@@ -333,6 +333,49 @@ select * from r3;
 ------------------------------------ NATACHA ------------------------------------
 ---------------------------------------------------------------------------------
 
+-- delete later
+select * from annulation;
+select * from compte_rendu;
+select * from consulte;
+select * from medecin;
+select * from notification;
+select * from patient;
+select * from plage_horaire;
+select * from rendez_vous;
+select * from specialite;
+select * from ville;
+
+-- 6: Historique des notifications envoyées à un patient spécifique.
+Insert into notification (contenue, date_envoie, id_patient) values
+	('RDV 3','2023-06-25 10:30:00', 3),
+	('RDV 4','2023-04-26 11:00:00', 2),
+	('RDV 8','2023-05-25 12:00:00', 2);
+/*
+r1 ← σ id_patient = ‘<patient spécifique>’ (NOTIFICATION)
+*/
+
+select * from notification where id_patient = 3; 
+
+-- 7: Liste des rendez-vous sans compte rendu médical.
+Insert into compte_rendu (contenu_cr, date_redaction, id_rdv) values
+	('Bien','2023-06-01 10:00:00', 5),
+	('Warning','2023-07-02 11:00:00', 3);
+/*
+r1 ← π id_rdv (RENDEZ_VOUS)
+r2 ← π id_rdv (COMPTE_RENDU)
+r3 ← r1 – r2
+*/
+
+
+-- 8: Les patients ayant annulé plus de 2 fois.
+/*
+r1 ← σ confirm_rdv = false (RENDEZ_VOUS)
+r2 ← id_patient 𝓐Count(confirm_rdv) (r1)
+r3 ← σ Count(confirm_rdv) > 2 (r2)
+r4 ← Patient ⋉ r3
+*/
+
+
 
 
 ---------------------------------------------------------------------------------
