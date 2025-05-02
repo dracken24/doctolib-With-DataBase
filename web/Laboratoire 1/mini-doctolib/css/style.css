@@ -72,7 +72,7 @@ body.loaded {
 /***                        Cartes Docteurs Style                           ***/
 /******************************************************************************/
 .doc_card {
-    width: 288px;
+    /* width: 288px; */
     /* height: 465px; */
     height: 435px;
     overflow: auto;
@@ -129,6 +129,23 @@ body.dark-mode {
   body.dark-mode .specialite {
     background: #23272b !important;
     border-color: #444 !important;
+  }
+  
+
+  body.dark-mode .search-bar, body.dark-mode .doc_card {
+    background-color: #636363 !important;
+    color: #ffffff !important;
+    border: 1px solid #f3f3f3a4 !important;
+  }
+
+  body.dark-mode .search-bar::placeholder {
+    background-color: #636363 !important;
+    color: #ffffff8e !important;
+  }
+
+  body.dark-mode .doc_btn {
+    color: #ffffff !important;
+    /* border: 1px solid #e4e4e452 !important; */
   }
   
   body.dark-mode h1, 

@@ -40,7 +40,7 @@ function afficherCartes (){
 
     medecins.forEach(item => {
         container.innerHTML = container.innerHTML + `
-        <div class="doc_card card border-dark m-1 p-0" style="display: block;">
+        <div class="col-md-6 col-lg-3 col-lg-3 doc_card card border-dark m-1 p-0" style="display: block;">
             <img src="https://shorturl.at/RuFY9" class="doc_card_pic card-img-top" alt="default avatar picture">
             <div class="card-body position-relative">
                 <h3 class="doc_card_nom card-title mb-2">${item.nom}</h3>

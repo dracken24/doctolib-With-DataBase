@@ -28,41 +28,23 @@
 
                     <!-- Filtres statiques -->
                     <div>
-                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Filtres</button>
+                        <button class="btn doc_btn dropdown-toggle" data-bs-toggle="dropdown">Filtres</button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" id="sortBySpeciality" onclick="filtreSpecialite()">Par spécialité</a></li>
                                     <li><a class="dropdown-item" id="sortByVille" onclick="filtreVille()">Par ville</a></li>
                                     <!-- <li><a class="dropdown-item" id="sortByName">Par nom</a></li> -->
                                 </ul>
-                        <button class="btn" id="resetBtn" onclick="resetCards()">Reset</button>
+                        <button class="btn doc_btn" id="resetBtn" onclick="resetCards()">Reset</button>
                     </div>
                     <div>
                         <input class="form-control mb-2 search-bar" type="Text" id="search" onkeyup="searching()" placeholder="Rechercher par nom, ville ou spécialité">
                     </div>
 
                     <!-- Carte Container -->
-                    <div class="shadow-lg border container p-3" >
+                    <div class="container" >
                         <!-- Carte Deck -->
-                        <div id="doc_card_deck" class="card-deck row d-flex m-0 gap-4 justify-content-center">
+                        <div id="doc_card_deck" class="card-deck row m-0 gap-4 justify-content-center">
                         <!-- Cards go here -->
-
-                        <!-- <div class="doc_card card border-dark m-1 p-0" style="display: block;">
-                            <img src="https://shorturl.at/RuFY9" class="doc_card_pic card-img-top" alt="default avatar picture">
-                            <div class="card-body position-relative">
-                                <h3 class="doc_card_nom card-title mb-2">${item.nom}</h3>
-                                <div>
-                                    <p class="doc_card_specialite lead mb-0">${item.specialite}</p>
-                                    <p class="doc_card_ville card-text">${item.ville}</p>
-                                </div>
-                            </div>
-                            <div class="card-footer position-relative">
-                                <center>
-                                <button type="button" class="btn btn-primary" onclick="location.href='booking.html'">
-                                    Prendre rendez-vous
-                                </button>
-                                </center>
-                            </div>
-                        </div> -->
 
                         </div>
                     </div>
