@@ -14,37 +14,17 @@ app.listen(3001, () => {
 /***                                   NADIA                                 ***/
 /*******************************************************************************/
 
-// Recuperer tout les medecins
-// app.get('/get_medecins', async (req, res) =>
-// {
-//     try 
-//     {
-//         console.log("Recuperation des medecins");
-//         const result = await pool.query('SELECT * FROM projet_final.medecin;');
-//         res.json(result.rows);
-//         // for (let i = 0; i < result.rows.length; i++)
-//         // {
-//         //     console.log("result: ", result.rows[i]);
-//         // }
-//     }
-//     catch (err)
-//     {
-//         console.error("Erreur lors de la recuperation des medecins:", err);
-//         res.status(500).send('Erreur serveur');
-//     }
-// });
-
 // Ajouter un medecin
 app.post('/add_medecins', async (req, res) =>
 {
-    try 
+    try
     {
         let {nom_medecin, prenom_medecin, email_medecin, id_specialite} = req.body;
 
         // Verifier si le medecin existe deja
         const existingMedecin = await pool.query(
-            'SELECT * FROM projet_final.medecin WHERE nom_medecin = $1 AND prenom_medecin = $2 AND email_medecin = $3 AND id_specialite = $4',
-            [nom_medecin, prenom_medecin, email_medecin, id_specialite]
+            'SELECT * FROM projet_final.medecin WHERE email_medecin = $1',
+            [email_medecin]
         );
 
         if (existingMedecin.rows.length > 0)

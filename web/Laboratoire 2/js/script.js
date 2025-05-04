@@ -24,7 +24,19 @@ function addMedecin()
     .then(response => response.json())
     .then(data => {
         console.log("data: ", data);
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Medecin ajouté avec succès");
+        }
     });
+
+    document.getElementById("inputNomCreation").value = "";
+    document.getElementById("inputPrenomCreation").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("id_specialite").value = "";
+    document.getElementById("inputMdpCreation").value = "";
+    document.getElementById("inputMdpVerif").value = "";
 }
 
 /******************************************************************************/

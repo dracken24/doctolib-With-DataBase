@@ -9,7 +9,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Ajouter la classe sticky-footer au body
     document.body.classList.add('sticky-footer');
-    
+
     document.getElementById('appBar').innerHTML = `
         <nav class="navbar bg-dark navbar-dark navbar-expand-md p-3">
             <div class="container col-12">
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-           
+
             <button id="darkModeToggle" class="btn btn-light position-fixed top-0 end-0 m-3" style="z-index:9999;">
                 <i id="darkModeIcon" class="fas fa-moon"></i>
             </button>
@@ -252,10 +252,15 @@ document.addEventListener('DOMContentLoaded', function(e) {
 					<div class="col-12 p-2 d-flex">
 						<label class="form-label align-self-center col-3"><strong>Specialite:</strong></label>
 						<select id="id_specialite" class="form-control" required>
+
 							<option value="">Sélectionnez une spécialité</option>
 							<option value="1">Médecin généraliste</option>
-							<option value="2">Dermatologue</option>
-							<option value="3">Ophtalmologue</option>
+							<option value="2">Médecine Familiale</option>
+							<option value="3">Endocrinologie</option>
+							<option value="4">Alergologue</option>
+							<option value="5">ORL</option>
+							<option value="6">Chirurgien-dentiste</option>
+              
 						</select>
 					</div>
 				</div>
@@ -267,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 			</div>
 		</div>
     `;
-    
+
     // Initialiser la vérification du mot de passe après la création des éléments
     const mdp = document.getElementById("inputMdpCreation");
     
@@ -278,13 +283,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
         digit : document.getElementById("digitCriteria"),
         special : document.getElementById("specialCriteria"),
     };
-    
+
     function MAJColorCriteria(ele, isValid)
     {
         ele.classList.toggle('text-success', isValid);
         ele.classList.toggle('text-danger', !isValid);
     }
-    
+
     mdp.addEventListener('input', () =>
     {
         const monMdp = mdp.value;

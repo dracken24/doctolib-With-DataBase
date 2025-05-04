@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function()
 });
 
 // clics sur les liens pour des transitions
-document.addEventListener('click', function(e)
+document.addEventListener('click', function(e) 
 {
     if (e.target.tagName === 'A' && e.target.href && e.target.href.startsWith(window.location.origin))
     {
