@@ -370,6 +370,83 @@ SELECT * FROM PATIENT JOIN r3 ON PATIENT.id_patient = r3.id_patient;
 --------------------------------- JEAN-FRANCOIS ---------------------------------
 ---------------------------------------------------------------------------------
 
+--2 :Trouver les créneaux disponibles pour un médecin donné à une date donnée. 
+
+
+with
+    -- Sélectionner les plages disponibles pour un médecin donné à une date donnée
+    r1 as (
+        select * from plage_horaire
+        where id_medecin = 1
+        and disponible = true
+        and date(heure_debut) = '2023-05-01'
+    ),
+    -- Trouver les rendez-vous qui occupent ces plages
+    r2 as (
+        select * from rendez_vous
+        where id_plage in (select id_plage from r1)
+    ),
+    -- Identifier les plages déjà prises
+    r3 as (
+        select r1.* from r1
+        join r2 on r1.id_plage = r2.id_plage
+    ),
+    -- Soustraire les plages prises
+    r4 as (
+        select * from r1
+        where id_plage not in (select id_plage from r3)
+    ),
+    -- Extraire uniquement les infos pertinentes
+    r5 as (
+        select id_plage, heure_debut, heure_fin from r4
+    )
+select * from r5;
+
+
+
+-- 3: Lister tous les rendez-vous annulés avec la date et la raison d’annulation. 
+
+with
+    -- Faire la jointure entre rendez_vous et annulation via id_rdv
+    r1 as (
+        select * from rendez_vous
+        join annulation using (id_rdv)
+    ),
+    -- Sélectionner seulement les colonnes demandées
+    r2 as (
+        select id_rdv, date_annulation, raison_annulation from r1
+    )
+select * from r2;
+
+
+
+-- 4 : Retrouver tous les patients qui ont pris au moins 3 rendez-vous avec le même médecin. 
+
+with
+    -- Compter le nombre de RV entre patient et Md
+    r1 as (
+        select rv.id_patient, ph.id_medecin, count(rv.id_rdv) as nb_rdv
+        from rendez_vous rv
+        join plage_horaire ph on rv.id_plage = ph.id_plage
+        group by rv.id_patient, ph.id_medecin
+    ),
+    -- Garder seulement ceux avec au moins 3 rendez-vous
+    r2 as (
+        select * from r1
+        where nb_rdv >= 3
+    ),
+    -- Ajouter les informations sur les patients
+    r3 as (
+        select r2.*, p.nom_patient, p.prenom_patient
+        from r2
+        join patient p on r2.id_patient = p.id_patient
+    ),
+    -- Sélectionner les colonnes finales
+    r4 as (
+        select id_patient, nom_patient, prenom_patient, id_medecin, nb_rdv from r3
+    )
+select * from r4;
+
 
 
 
