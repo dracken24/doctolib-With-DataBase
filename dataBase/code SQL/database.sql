@@ -406,6 +406,10 @@ select * from r5;
 
 -- 3: Lister tous les rendez-vous annulés avec la date et la raison d’annulation. 
 
+
+insert into annulation (date_annulation, raison_annulation, id_rdv)
+values ('2025-05-01', 'Le patient a mangé trop de poutine', 1);
+
 with
     -- Faire la jointure entre rendez_vous et annulation via id_rdv
     r1 as (

@@ -125,12 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         <div class="col-md-5 offset-md-1 mb-3">
                         <form>
-                            <h5>Subscribe to our newsletter</h5>
-                            <p>Monthly digest of what's new and exciting from us.</p>
+                            <h5>Inscrivez-vous à notre infolettre</h5>
+                            <p>Recevez chaque mois, ce qui est nouveau et excitant de nous.</p>
                             <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                             <label for="newsletter1" class="visually-hidden">Email address</label>
                             <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-primary" type="button">Subscribe</button>
+                            <button class="btn btn-primary" type="button">S'abonner</button>
                             </div>
                         </form>
                         </div>
@@ -301,6 +301,83 @@ document.addEventListener('DOMContentLoaded', function(e) {
     });
 });
 
+
+/******************************************************************************/
+/***                      données des médecins/docteurs                     ***/
+/******************************************************************************/
+const medecins = [
+  {
+  id: 1,
+      nom: "Dr. Aymen Rabah",
+  specialite: "Diabétologue",
+  ville: "Montréal",
+  disponibilites: {
+  "2025-04-10": ["09:00", "10:00", "14:00"],
+  "2025-04-11": ["11:00", "15:30"],
+  }
+  },
+  {
+  id: 2,
+      nom: "Dr. Danielle Nicole Jones",
+  specialite: "Gynécologue",
+  ville: "Montréal",
+  disponibilites: {
+  "2025-04-07": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
+  "2025-04-08": ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
+  "2025-04-09": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
+  "2025-04-10": ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"],
+  "2025-04-11": ["10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"],
+  }
+  },
+  {
+  id: 3,
+      nom: "Dr. Martine Hubert",
+  specialite: "Médecin généraliste",
+  ville: "Boucherville",
+  disponibilites: {
+  "2025-04-07": ["12:00", "15:00"],
+  "2025-04-08": ["10:00", "12:00", "13:00", "14:00"],
+  "2025-04-09": ["10:00", "12:00", "13:00", "14:00", "15:00"],
+  "2025-04-10": ["12:00", "14:00", "15:00"],
+  "2025-04-11": ["10:00", "11:00", "12:00", "13:00"],
+  }
+  },
+  {
+  id: 4,
+      nom: "Dr. Natacha Meyer",
+  specialite: "Gynécologue",
+  ville: "Boucherville",
+  disponibilites: {
+  "2025-04-12": ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"],
+  "2025-04-13": ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"],
+  }
+  },
+  {
+  id: 5,
+      nom: "Dr. Nadia Desjardins",
+  specialite: "Ostéopathe",
+  ville: "Laval",
+  disponibilites: {
+  "2025-04-07": ["09:00", "09:30"],
+  "2025-04-09": ["11:00", "11:30"],
+  "2025-04-11": ["13:00", "13:30"],
+  "2025-04-13": ["15:00", "15:30"],
+  }
+  },
+  {
+  id: 6,
+      nom: "Dr. Jean-François Lefebvre",
+  specialite: "Médecin généraliste",
+  ville: "Montréal",
+  disponibilites: {
+  "2025-04-08": ["10:00", "10:30", "12:00", "12:30"],
+  "2025-04-10": ["12:30", "14:00", "14:30", "16:00"],
+  "2025-04-12": ["16:00", "16:30"],
+  }
+  }
+  ];
+
+
 /******************************************************************************/
 /***                                  NATACHA                               ***/
 /******************************************************************************/
@@ -440,43 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   
-    // Pré-remplir depuis URL ou localStorage
-    function preselectionDepuisURLouStorage() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id') || localStorage.getItem('medecin_id');
-      if (id !== null) {
-        const med = medecins.find(m => m.id === parseInt(id));
-        if (med) {
-          const specialiteNormalisee = normalizeString(med.specialite);
-          selectSpecialite.value = specialiteNormalisee;
-          selectSpecialite.dispatchEvent(new Event('change'));
-  
-          setTimeout(() => {
-            selectMedecin.value = med.id;
-            selectMedecin.dispatchEvent(new Event('change'));
-          }, 100);
-        }
-      }
-    }
-  
-    function enregistrerRendezVous() {
-      const rendezVous = {
-        nom: document.getElementById('nom').value,
-        prenom: document.getElementById('prenom').value,
-        email: document.getElementById('emailbooking').value,
-        tel: document.getElementById('tel').value,
-        specialite: selectSpecialite.options[selectSpecialite.selectedIndex].text,
-        medecin: selectMedecin.options[selectMedecin.selectedIndex].text,
-        date: selectDate.value,
-        heure: selectHeure.value,
-        message: document.getElementById('message').value,
-      };
-    
-      // Récupérer la liste actuelle
-      const anciensRdv = JSON.parse(localStorage.getItem('rendezvous')) || [];
-      anciensRdv.push(rendezVous);
-      localStorage.setItem('rendezvous', JSON.stringify(anciensRdv));
-    }
+       
   
     //  Gestion du bouton "Confirmer"
   const boutonConfirmer = document.querySelector('button.btn-success[data-bs-target="#confirmation"]');
