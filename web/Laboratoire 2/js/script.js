@@ -47,8 +47,12 @@ function addMedecin()
 /***                      données des médecins/docteurs                     ***/
 /******************************************************************************/
 function afficherCartes (){
-    const container = document.getElementById('doc_card_deck');
-    container.innerHTML = "";
+    const container = document.getElementById("doc_card_deck");
+
+    if (container == null)
+    {
+        return;
+    }
 
     medecins.forEach(item => {
         container.innerHTML = container.innerHTML + `
@@ -186,6 +190,12 @@ let originalCards = [];
 // Function to initialize the original card order
 function initializeOriginalCards() {
     const cardDeck = document.getElementById('doc_card_deck');
+
+    if (cardDeck == null)
+    {
+        return;
+    }
+
     const cards = Array.from(cardDeck.getElementsByClassName('doc_card'));
     originalCards = cards.map(card => card.cloneNode(true)); // Clone the original cards
 }

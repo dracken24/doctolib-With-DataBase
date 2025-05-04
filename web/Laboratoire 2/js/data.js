@@ -391,9 +391,7 @@ const medecins = [
 /***                               JEAN-FRANCOIS                             ***/
 /*******************************************************************************/
 
-
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () =>{
     //  Gestion du Dark Mode
     const toggleBtn = document.getElementById('darkModeToggle');
     const icon = document.getElementById('darkModeIcon');
@@ -430,6 +428,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const messageErreur = document.createElement('p');
   messageErreur.className = 'text-danger mt-2';
   selectHeure?.parentElement?.appendChild(messageErreur);
+
+  if (selectSpecialite == null)
+  {
+    // console.log("selectSpecialite is null");
+    return;
+  }
   
   //  Nettoyage du formulaire au chargement
   selectSpecialite.innerHTML = '<option value="">Sélectionnez une spécialité</option>';
@@ -438,6 +442,8 @@ document.addEventListener('DOMContentLoaded', () => {
   selectHeure.innerHTML = '';
   messageErreur.textContent = '';
   localStorage.removeItem('medecin_id');
+  // console.log("***************************************");
+  
   
   
     //  Générer dynamiquement les spécialités
@@ -466,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectMedecin.appendChild(option);
       });
     });
-  
+
     //  Afficher les dates disponibles selon le médecin
     selectMedecin.addEventListener('change', () => {
       const idMedecin = parseInt(selectMedecin.value);
@@ -564,88 +570,90 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'confirmation.html';
     });
   }
-const btnRecap = document.getElementById('btnRecap');
-const modalBody = document.getElementById('recap-body');
+  const btnRecap = document.getElementById('btnRecap');
+  const modalBody = document.getElementById('recap-body');
 
 
-// Bouton recap
-btnRecap?.addEventListener('click', () => {
-  const nom = document.getElementById('nom').value;
-  const prenom = document.getElementById('prenom').value;
-  const email = document.getElementById('emailbooking').value;
-  const tel = document.getElementById('tel').value;
-  const specialite = document.getElementById('specialite').selectedOptions[0]?.textContent;
-  const medecin = document.getElementById('medecin').selectedOptions[0]?.textContent;
-  const date = document.getElementById('date').value;
-  const heure = document.getElementById('heure').value;
-  const message = document.getElementById('message')?.value || '';
+  // Bouton recap
+  btnRecap?.addEventListener('click', () => {
+    const nom = document.getElementById('nom').value;
+    const prenom = document.getElementById('prenom').value;
+    const email = document.getElementById('emailbooking').value;
+    const tel = document.getElementById('tel').value;
+    const specialite = document.getElementById('specialite').selectedOptions[0]?.textContent;
+    const medecin = document.getElementById('medecin').selectedOptions[0]?.textContent;
+    const date = document.getElementById('date').value;
+    const heure = document.getElementById('heure').value;
+    const message = document.getElementById('message')?.value || '';
 
-  const recap = { nom, prenom, email, tel, specialite, medecin, date, heure, message };
-  localStorage.setItem('rdv', JSON.stringify(recap)); // pour la page confirmation
+    const recap = { nom, prenom, email, tel, specialite, medecin, date, heure, message };
+    localStorage.setItem('rdv', JSON.stringify(recap)); // pour la page confirmation
 
-  // Afficher le recap
-  modalBody.innerHTML = `
-    <div class="alert alert-info">
-      <h5 class="mb-3">Récapitulatif de votre rendez-vous :</h5>
-      <p><strong>Nom :</strong> ${nom} ${prenom}</p>
-      <p><strong>Email :</strong> ${email}</p>
-      <p><strong>Téléphone :</strong> ${tel}</p>
-      <p><strong>Spécialité :</strong> ${specialite}</p>
-      <p><strong>Médecin :</strong> ${medecin}</p>
-      <p><strong>Date :</strong> ${date}</p>
-      <p><strong>Heure :</strong> ${heure}</p>
-      <p><strong>Message :</strong> ${message || 'Aucun message.'}</p>
-    </div>
-  `;
-});
-
-// Bouton confirmFinal
-document.getElementById('confirmFinal')?.addEventListener('click', () => {
-  // Met à jour les créneaux occupés
-const idMedecin = document.getElementById("medecin").value;
-const dateChoisie = document.getElementById("date").value;
-const heureChoisie = document.getElementById("heure").value;
-
-let rdvOccupees = JSON.parse(localStorage.getItem("rdv_occupees")) || {};
-
-if (!rdvOccupees[idMedecin]) {
-  rdvOccupees[idMedecin] = {};
-}
-if (!rdvOccupees[idMedecin][dateChoisie]) {
-  rdvOccupees[idMedecin][dateChoisie] = [];
-}
-if (!rdvOccupees[idMedecin][dateChoisie].includes(heureChoisie)) {
-  rdvOccupees[idMedecin][dateChoisie].push(heureChoisie);
-}
-
-localStorage.setItem("rdv_occupees", JSON.stringify(rdvOccupees));
+    // Afficher le recap
+    modalBody.innerHTML = `
+      <div class="alert alert-info">
+        <h5 class="mb-3">Récapitulatif de votre rendez-vous :</h5>
+        <p><strong>Nom :</strong> ${nom} ${prenom}</p>
+        <p><strong>Email :</strong> ${email}</p>
+        <p><strong>Téléphone :</strong> ${tel}</p>
+        <p><strong>Spécialité :</strong> ${specialite}</p>
+        <p><strong>Médecin :</strong> ${medecin}</p>
+        <p><strong>Date :</strong> ${date}</p>
+        <p><strong>Heure :</strong> ${heure}</p>
+        <p><strong>Message :</strong> ${message || 'Aucun message.'}</p>
+      </div>
+    `;
+  });
 
 
 
+  // Bouton confirmFinal
+  document.getElementById('confirmFinal')?.addEventListener('click', () => {
+    // Met à jour les créneaux occupés
+  const idMedecin = document.getElementById("medecin").value;
+  const dateChoisie = document.getElementById("date").value;
+  const heureChoisie = document.getElementById("heure").value;
 
-    window.location.href = 'confirmation.html';
-});
+  let rdvOccupees = JSON.parse(localStorage.getItem("rdv_occupees")) || {};
+
+  if (!rdvOccupees[idMedecin]) {
+    rdvOccupees[idMedecin] = {};
+  }
+  if (!rdvOccupees[idMedecin][dateChoisie]) {
+    rdvOccupees[idMedecin][dateChoisie] = [];
+  }
+  if (!rdvOccupees[idMedecin][dateChoisie].includes(heureChoisie)) {
+    rdvOccupees[idMedecin][dateChoisie].push(heureChoisie);
+  }
+
+  localStorage.setItem("rdv_occupees", JSON.stringify(rdvOccupees));
 
 
-//Bouton recap
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault(); 
-    if (this.checkValidity()) {
-        var recapModal = new bootstrap.Modal(document.getElementById('recap'));
-        recapModal.show();
-    } else {
-        this.reportValidity(); 
-    }
-});
 
-//Bouton annuler
-document.getElementById('annuler').addEventListener('click', function() {
-    var recapModal = bootstrap.Modal.getInstance(document.getElementById('recap'));
-    recapModal.hide();
 
-    setTimeout(function() {
-        var rdvModal = new bootstrap.Modal(document.getElementById('rendez-vous'));
-        rdvModal.show();
-    }, 400); 
-});
+      window.location.href = 'confirmation.html';
+  });
+
+
+  //Bouton recap
+  document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      if (this.checkValidity()) {
+          var recapModal = new bootstrap.Modal(document.getElementById('recap'));
+          recapModal.show();
+      } else {
+          this.reportValidity(); 
+      }
+  });
+
+  //Bouton annuler
+  document.getElementById('annuler').addEventListener('click', function() {
+      var recapModal = bootstrap.Modal.getInstance(document.getElementById('recap'));
+      recapModal.hide();
+
+      setTimeout(function() {
+          var rdvModal = new bootstrap.Modal(document.getElementById('rendez-vous'));
+          rdvModal.show();
+      }, 400); 
+  });
 });
