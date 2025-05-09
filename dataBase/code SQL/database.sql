@@ -319,10 +319,9 @@ with
 		from plage_horaire),
 	-- Choisire une anne et une semaine particuliere (semaine en cours ou semaine precise)
 	r2 as (select * from r1
-		where annee = '2023' and semaine = 31)
-select * from r2;
+		where annee = '2023' and semaine = 31),
 	-- Medecin trouver (r2) - table medecin
-	r3 as(select * from medecin
+	r3 as (select * from medecin
 		where id_medecin not in (select id_medecin from r2))
 		
 select * from r3;
@@ -341,12 +340,15 @@ Insert into notification (contenue, date_envoie, id_patient) values
 
 select * from notification where id_patient = 2;
 
+
+
 -- 7: Liste des rendez-vous sans compte rendu médical.
 Insert into compte_rendu (contenu_cr, date_redaction, id_rdv) values
 	('Bien','2023-06-01 10:00:00', 5),
 	('Warning','2023-07-02 11:00:00', 3);
 
 SELECT * FROM RENDEZ_VOUS WHERE id_rdv NOT IN (SELECT id_rdv FROM COMPTE_RENDU);
+
 
 
 -- 8: Les patients ayant annulé plus de 2 fois.
@@ -377,7 +379,7 @@ with
     -- Sélectionner les plages disponibles pour un médecin donné à une date donnée
     r1 as (
         select * from plage_horaire
-        where id_medecin = 1
+        where id_medecin = 2
         and disponible = true
         and date(heure_debut) = '2023-05-01'
     ),

@@ -1,0 +1,173 @@
+/*******************************************************************************/
+/***      Styles pour éviter le flash blanc lors du changement de page       ***/
+/*******************************************************************************/
+html {
+    background-color: #212529;
+    transition: opacity 1s ease-in-out;
+    height: 100%;
+}
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* fix footer au bas de la page */
+.sticky-footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sticky-footer main {
+    flex: 1 0 auto;
+}
+
+.footer-container {
+    flex-shrink: 0;
+}
+
+/* nav-link */
+
+.nav-link:hover {
+    color: #0d6efd !important;
+    transition: color 1s ease;
+}
+
+.icon-link {
+    color: #686868 !important;
+    transition: color 1s ease;
+}
+
+.icon-link:hover {
+    color: #0d6efd !important;
+    transition: color 1s ease;
+}
+
+/* Masquer le contenu jusqu'a ce qu'il soit charge */
+.page-transition {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page-transition.loaded {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+.specialite {
+    background-color: rgb(15, 112, 203);
+}
+
+
+/******************************************************************************/
+/***                        Cartes Docteurs Style                           ***/
+/******************************************************************************/
+.doc_card {
+    /* width: 288px; */
+    /* height: 465px; */
+    height: 435px;
+    overflow: auto;
+  }
+
+.doc_card_pic {
+    height: 250px;
+    object-fit: cover;
+}
+
+.specialite {
+  perspective: 800px; /* Pour l'effet 3D */
+  transition: transform 1.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+  will-change: transform;
+}
+
+.specialite .justify-content-center {
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1);
+  will-change: transform;
+}
+
+.specialite:hover {
+  transform: scale(1.08) rotateY(360deg);
+  z-index: 2;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.specialite:hover .justify-content-center {
+  /* Optionnel : un petit zoom sur le contenu aussi */
+  transform: scale(1.05);
+}
+
+.specialite {
+    transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+    will-change: transform;
+    cursor: pointer;
+  }
+  
+  .specialite:hover {
+    transform: scale(1.08);
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+
+  /******************************************************************************/
+/***                        Dark Mode                                        ***/
+/******************************************************************************/
+body.dark-mode {
+    background: #181a1b !important;
+    color: #f1f1f1 !important;
+  }
+  
+  body.dark-mode .specialite {
+    background: #23272b !important;
+    border-color: #444 !important;
+  }
+  
+
+  body.dark-mode .search-bar, body.dark-mode .doc_card {
+    background-color: #636363 !important;
+    color: #ffffff !important;
+    border: 1px solid #f3f3f3a4 !important;
+  }
+
+  body.dark-mode .search-bar::placeholder {
+    background-color: #636363 !important;
+    color: #ffffff8e !important;
+  }
+
+  body.dark-mode .doc_btn {
+    color: #ffffff !important;
+    /* border: 1px solid #e4e4e452 !important; */
+  }
+  
+  body.dark-mode h1, 
+  body.dark-mode h2, 
+  body.dark-mode h4, 
+  body.dark-mode p {
+    color: #f1f1f1 !important;
+  }
+  
+
+  /* Bouton Prise de rendez-vous */
+.rv-btn {
+    width: 250px;   
+    height: 100px;   
+    font-size: 1.3rem; 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+  
